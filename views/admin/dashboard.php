@@ -20,7 +20,7 @@
     <h3>Aksi Cepat</h3>
     <div style="margin-top: 10px;">
         <a href="index.php?page=manage_teachers" class="btn btn-primary">➕ Tambah/Kelola Guru</a>
-        <a href="#" class="btn btn-success" onclick="alert('Fitur ini belum dibuat views-nya')">🏫 Kelola Sekolah</a>
+        <a href="index.php?page=manage_schools" class="btn btn-success">🏫 Kelola Sekolah</a>
     </div>
 </div>
 
