@@ -16,7 +16,8 @@
 
         <div class="form-group">
             <label>Email Address</label>
-            <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>" required>
+            <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>" id="email">
+            <small id="emailError" class="err"></small>
         </div>
 
         <?php if($_SESSION['role'] != 'admin'): ?>
@@ -62,6 +63,18 @@
             this.textContent = type === 'password' ? '👁️' : '🙈';
         });
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+        form.addEventListener('submit', (e) => {
+            const email = document.getElementById('email').value.trim();
+
+            let ok = true;
+            if (!validateEmail(email)) {ok = false};
+            if (!ok){e.preventDefault()};
+        });
+    });
 </script>
 
 <?php include 'views/layouts/footer.php'; ?>

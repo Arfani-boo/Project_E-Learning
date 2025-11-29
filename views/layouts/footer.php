@@ -5,6 +5,7 @@
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/validate.js"></script>
     
 </body>
 </html>

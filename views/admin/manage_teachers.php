@@ -16,38 +16,42 @@
                     <input type="hidden" name="aksi" value="tambah">
 
                     <div class="form-group">
-                        <label>Nama Lengkap Guru</label>
-                        <input type="text" name="full_name" class="form-control" required placeholder="Misal: Mr. Budi">
+                        <label>Nama Lengkap Guru<a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="full_name" class="form-control" id="nama" placeholder="Misal: Mr. Budi">
+                        <small id="fullNameError" class="err"></small>
                     </div>
 
                     <div class="form-group">
-                        <label>Email Login</label>
-                        <input type="email" name="email" class="form-control" required placeholder="guru@sekolah.id">
+                        <label>Email Login<a style="color:red; font-size:large;">*</a></label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="guru@sekolah.id">
+                        <small id="emailError" class="err"></small>
                     </div>
 
                     <div class="form-group">
-                        <label>Password Awal</label>
+                        <label>Password Awal<a style="color:red; font-size:large;">*</a></label>
                         <div style="position: relative;">
-                            <input type="password" name="password" id="passInputGuru" class="form-control" required placeholder="******">
+                            <input type="password" name="password" id="passInputGuru" class="form-control" placeholder="******">
                             <span style="position: absolute; right: 10px; top: 10px; cursor: pointer;" title="Lihat Password">
                                 👁️
                             </span>
                         </div>
+                        <small id="passwordError" class="err"></small>
                         <small style="color: gray;">Guru bisa menggantinya nanti.</small>
                     </div>
 
                     <div class="form-group">
-                        <label>Asal Sekolah</label>
-                        <select name="school_id" class="form-control" required>
-                            <option value="">-- Pilih Sekolah --</option>
+                        <label>Asal Sekolah<a style="color:red; font-size:large;">*</a></label>
+                        <select name="school_id" class="form-control" id="sekolah">
+                            <option value="" id="sekolah">-- Pilih Sekolah --</option>
                             <?php 
                             // Kita reset pointer data sekolah jika perlu, atau loop ulang
                             // Pastikan $sekolah dikirim dari Controller
                             foreach($sekolah as $s): 
                             ?>
-                                <option value="<?= $s['id'] ?>"><?= $s['name'] ?></option>
+                                <option value="<?= $s['id'] ?>" id="sekolah"><?= $s['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
+                        <small id="sekolahError" class="err"></small>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Simpan Data Guru</button>
@@ -100,5 +104,22 @@
 
     </div>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const email   = document.getElementById('email').value.trim();
+        const password   = document.getElementById('passInputGuru').value.trim();
+        const nama   = document.getElementById('nama').value.trim();
+        const sekul   = document.getElementById('sekolah').value;
+        let ok = true;
+        if (!validateEmail(email)) {ok = false};
+        if (!validatePassword(password)) {ok = false};
+        if (!validateFullName(nama)) {ok = false};
+        if (!validateSekolah(sekul)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
+</script>
 <?php include 'views/layouts/footer.php'; ?>

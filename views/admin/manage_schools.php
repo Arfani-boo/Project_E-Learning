@@ -15,8 +15,9 @@
                     <input type="hidden" name="aksi" value="tambah">
                     
                     <div class="form-group">
-                        <label>Nama Sekolah</label>
-                        <input type="text" name="name" class="form-control" required placeholder="Misal: SMAN 1 Jakarta">
+                        <label>Nama Sekolah <a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="name" class="form-control" id="NamaSekolah" placeholder="Example: SMAN 1 Jakarta">
+                        <small id="namaSekolahError" class="err"></small>
                     </div>
                     
                     <div class="form-group">
@@ -60,5 +61,17 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const sekulName = document.getElementById('NamaSekolah').value.trim();
 
+        let ok = true;
+        if (!validateNamaSekolah(sekulName)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
+</script>
 <?php include 'views/layouts/footer.php'; ?>

@@ -12,14 +12,16 @@
 
         <div class="form-group">
             <label>Judul Kelas</label>
-            <input type="text" name="title" class="form-control" required 
+            <input type="text" name="title" class="form-control" id="judul" 
                    value="<?= isset($data_edit) ? $data_edit['title'] : '' ?>"
                    placeholder="Contoh: Basic English Grammar">
+            <small id="judulError" class="err"></small>
         </div>
 
         <div class="form-group">
             <label>Deskripsi Singkat</label>
-            <textarea name="description" class="form-control" rows="3" required><?= isset($data_edit) ? $data_edit['description'] : '' ?></textarea>
+            <textarea name="description" class="form-control" rows="3" id="deskripsi"><?= isset($data_edit) ? $data_edit['description'] : '' ?></textarea>
+            <small id="deskripsiError" class="err"></small>
         </div>
 
         <div class="form-group">
@@ -40,5 +42,18 @@
         </div>
     </form>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const judul   = document.getElementById('judul').value.trim();
+        const deskripsi   = document.getElementById('deskripsi').value.trim();
+        let ok = true;
+        if (!validateClassTitle(judul)) {ok = false};
+        if (!validateDescription(deskripsi)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
+</script>
 <?php include 'views/layouts/footer.php'; ?>

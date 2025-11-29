@@ -14,19 +14,21 @@
     <form action="index.php?page=login" method="POST">
         <div class="form-group">
             <label>Email Address</label>
-            <input type="email" name="email" class="form-control" required placeholder="contoh@email.com">
+            <input type="text" id="email" name="email" class="form-control" placeholder="contoh@email.com">
+            <small id="emailError" class="err"></small>
         </div>
-            <div class="form-group">
-                <label>Password</label>
+        <div class="form-group">
+            <label>Password</label>
+            
+            <div style="position: relative;">
+                <input type="password" name="password" id="passInput" class="form-control" placeholder="******">
                 
-                <div style="position: relative;">
-                    <input type="password" name="password" id="passInput" class="form-control" required placeholder="******">
-                    
-                    <span id="togglePass" style="position: absolute; right: 10px; top: 10px; cursor: pointer;">
-                        👁️
-                    </span>
-                </div>  
+                <span id="togglePass" style="position: absolute; right: 10px; top: 10px; cursor: pointer;">
+                    👁️
+                </span>
             </div>
+             <small id="passwordError" class="err"></small>
+        </div>
         <button type="submit" class="btn btn-primary btn-block">Masuk Sekarang</button>
     </form>
 
@@ -34,5 +36,18 @@
         Siswa baru? <a href="index.php?page=register">Daftar di sini</a>
     </p>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const email   = document.getElementById('email').value.trim();
+        const password   = document.getElementById('passInput').value.trim();
+        let ok = true;
+        if (!validateEmail(email)) {ok = false};
+        if (!validatePassword(password)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
+</script>
 <?php include 'views/layouts/footer.php'; ?>
