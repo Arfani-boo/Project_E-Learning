@@ -96,17 +96,19 @@
             <div class="card" style="background: #fdfdfe;">
                 <h4>➕ Tambah Bab / Modul Baru</h4>
                 <hr>
-                <form action="" method="POST">
+                <form action="" method="POST" id="newBab">
                     <input type="hidden" name="add_chapter" value="1">
                     
                     <div class="form-group">
-                        <label>Judul Bab</label>
-                        <input type="text" name="chapter_title" class="form-control" required placeholder="Misal: Chapter 1 - Introduction">
+                        <label>Judul Bab<a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="chapter_title" class="form-control" id="bab" placeholder="Misal: Chapter 1 - Introduction">
+                        <small id="babError" class="err"></small>
                     </div>
                     
                     <div class="form-group">
-                        <label>Urutan Bab</label>
-                        <input type="number" name="sequence_order" class="form-control" value="1" required>
+                        <label>Urutan Bab<a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="sequence_order" class="form-control" value="1" id="urut">
+                        <small id="urutBabError" class="err"></small>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Simpan Bab</button>
@@ -116,5 +118,18 @@
 
     </div>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('newBab');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const bab  = document.getElementById('bab').value.trim();
+        const urut   = document.getElementById('urut').value.trim();
+        let ok = true;
+        if (!validateBabTitle(bab)) {ok = false};
+        if (!validateUrutanB(urut)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
+</script>
 <?php include 'views/layouts/footer.php'; ?>

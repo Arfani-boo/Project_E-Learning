@@ -39,19 +39,20 @@
                         <input type="hidden" name="attempt_id" value="<?= $row['attempt_id'] ?>">
                         
                         <div style="display: flex; align-items: center; gap: 15px;">
-                            <label style="font-weight: bold;">Beri Nilai:</label>
+                            <label style="font-weight: bold;">Beri Nilai:<a style="color:red; font-size:large;">*</a></label>
                             
-                            <input type="number" name="score" class="form-control" 
+                            <input type="text" name="score" class="form-control"
                                    style="width: 100px;" 
                                    min="0" max="<?= $row['max_points'] ?>" 
-                                   required placeholder="0 - <?= $row['max_points'] ?>">
+                                   id="nilai" placeholder="0 - <?= $row['max_points'] ?>">
                             
                             <span style="color: gray;">(Max: <?= $row['max_points'] ?> Poin)</span>
-                            
-                            <button type="submit" class="btn btn-primary">
-                                ✅ Simpan Nilai
-                            </button>
+                
                         </div>
+                        <small id="nilaiError" class="err"></small>
+                        <button type="submit" class="btn btn-primary">
+                                ✅ Simpan Nilai
+                        </button>
                     </form>
 
                 </div>
@@ -61,5 +62,16 @@
 
     <?php endif; ?>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const nilai  = document.getElementById('nilai').value.trim();
+        let ok = true;
+        if (!validateNilai(nilai)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
+</script>
 <?php include 'views/layouts/footer.php'; ?>

@@ -49,14 +49,14 @@
                             </label>
                         <?php endforeach; ?>
                     </div>
-
                 <?php else: ?>
                     <textarea name="jawaban[<?= $s['id'] ?>]" 
                               class="form-control input-jawaban" 
                               data-soalid="<?= $s['id'] ?>"
                               rows="5" 
                               placeholder="Ketik jawaban Anda di sini..." 
-                              required></textarea>
+                              id="esai"></textarea>
+                    <small id="esaiError" class="err"></small>
                 <?php endif; ?>
 
             </div>
@@ -73,6 +73,18 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const pilgan  = document.getElementById('pilgan').value.trim();
+        const esai   = document.getElementById('esai').value.trim();
+        let ok = true;
+        if (!validatePilganMurid(pilgan)) {ok = false};
+        if (!validateEsai(esai)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
 document.addEventListener("DOMContentLoaded", function() {
     const semuaInput = document.querySelectorAll('.input-jawaban');
     const totalSoal = document.getElementById('totalSoal').innerText;

@@ -107,8 +107,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Pertanyaan / Soal</label>
-                        <textarea name="question_text" class="form-control" rows="3" required placeholder="Tulis pertanyaan di sini..."></textarea>
+                        <label>Pertanyaan / Soal<a style="color:red; font-size:large;">*</a></label>
+                        <textarea name="question_text" class="form-control" rows="3" id="soal" placeholder="Tulis pertanyaan di sini..."></textarea>
+                        <small id="soalError" class="err"></small>
                     </div>
 
                     <div class="form-group">
@@ -118,9 +119,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Bobot Nilai (Poin)</label>
-                        <input type="number" name="weight" class="form-control" required placeholder="Contoh: 10" min="1" max="100">
-                        
+                        <label>Bobot Nilai (Poin)<a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="weight" class="form-control" id="nilai" placeholder="Contoh: 10" min="1" max="100">
+                        <small id="nilaiError" class="err"></small>
                         <?php $sisa_kuota = 100 - $total_skor_saat_ini; ?>
                         <div style="margin-top: 5px; font-size: 0.85rem;">
                             Total saat ini: <b><?= $total_skor_saat_ini ?>/100</b>
@@ -132,14 +133,14 @@
                     </div>
 
                     <div id="areaPilihanGanda">
-                        <label>Opsi Jawaban & Kunci:</label>
+                        <label>Opsi Jawaban & Kunci:<a style="color:red; font-size:large;">*</a></label>
                         <div style="background: #f4f6f7; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
                             
                             <div class="form-group" style="margin-bottom: 8px;">
                                 <div style="display: flex; gap: 10px; align-items: center;">
-                                    <input type="radio" name="correct_option" value="A" required checked>
+                                    <input type="radio" name="correct_option" value="A" checked>
                                     <span style="font-weight: bold;">A.</span>
-                                    <input type="text" name="options[A]" class="form-control" placeholder="Jawaban A" required>
+                                    <input type="text" name="options[A]" class="form-control" placeholder="Jawaban A" id="pilganA">
                                 </div>
                             </div>
                             
@@ -147,7 +148,7 @@
                                 <div style="display: flex; gap: 10px; align-items: center;">
                                     <input type="radio" name="correct_option" value="B">
                                     <span style="font-weight: bold;">B.</span>
-                                    <input type="text" name="options[B]" class="form-control" placeholder="Jawaban B" required>
+                                    <input type="text" name="options[B]" class="form-control" placeholder="Jawaban B" id="pilganB">
                                 </div>
                             </div>
 
@@ -155,7 +156,7 @@
                                 <div style="display: flex; gap: 10px; align-items: center;">
                                     <input type="radio" name="correct_option" value="C">
                                     <span style="font-weight: bold;">C.</span>
-                                    <input type="text" name="options[C]" class="form-control" placeholder="Jawaban C" required>
+                                    <input type="text" name="options[C]" class="form-control" placeholder="Jawaban C" id="pilganC">
                                 </div>
                             </div>
 
@@ -163,10 +164,10 @@
                                 <div style="display: flex; gap: 10px; align-items: center;">
                                     <input type="radio" name="correct_option" value="D">
                                     <span style="font-weight: bold;">D.</span>
-                                    <input type="text" name="options[D]" class="form-control" placeholder="Jawaban D" required>
+                                    <input type="text" name="options[D]" class="form-control" placeholder="Jawaban D" id="pilganD">
                                 </div>
                             </div>
-                            
+                            <small id="pilganError" class="err"></small>
                             <small style="display: block; margin-top: 10px; color: #7f8c8d;">
                                 🔵 Klik lingkaran (radio button) pada jawaban yang benar.
                             </small>
@@ -185,6 +186,29 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        let ok = true;
+        const type = document.getElementById('tipeSoal').value;
+        const judul   = document.getElementById('soal').value.trim();
+        const nilai   = document.getElementById('nilai').value.trim();
+        if (!validateSoal(judul)) {ok = false};
+        if (!validateNilai(nilai)) {ok = false};
+        if (type === "multiple_choice"){
+            const pilganA  = document.getElementById('pilganA').value.trim();
+            const pilganB  = document.getElementById('pilganB').value.trim();
+            const pilganC  = document.getElementById('pilganC').value.trim();
+            const pilganD  = document.getElementById('pilganD').value.trim();
+            if (!validatePilgan(pilganA)) {ok = false};
+            if (!validatePilgan(pilganB)) {ok = false};
+            if (!validatePilgan(pilganC)) {ok = false};
+            if (!validatePilgan(pilganD)) {ok = false};
+            }
+        if (!ok){e.preventDefault()};
+    });
+});
 function gantiTipe() {
     var tipe = document.getElementById("tipeSoal").value;
     var areaPG = document.getElementById("areaPilihanGanda");

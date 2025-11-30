@@ -11,7 +11,7 @@
         <?php endif; ?>
 
         <div class="form-group">
-            <label>Judul Kelas</label>
+            <label>Judul Kelas<a style="color:red; font-size:large;">*</a></label>
             <input type="text" name="title" class="form-control" id="judul" 
                    value="<?= isset($data_edit) ? $data_edit['title'] : '' ?>"
                    placeholder="Contoh: Basic English Grammar">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="form-group">
-            <label>Deskripsi Singkat</label>
+            <label>Deskripsi Singkat<a style="color:red; font-size:large;">*</a></label>
             <textarea name="description" class="form-control" rows="3" id="deskripsi"><?= isset($data_edit) ? $data_edit['description'] : '' ?></textarea>
             <small id="deskripsiError" class="err"></small>
         </div>

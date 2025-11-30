@@ -9,17 +9,17 @@
 
     <form action="index.php?page=register" method="POST">
         <div class="form-group">
-            <label>Nama Lengkap</label>
+            <label>Nama Lengkap<a style="color:red; font-size:large;">*</a></label>
             <input type="text" name="full_name" class="form-control" id="nama">
             <small id="fullNameError" class="err"></small>
         </div>
         <div class="form-group">
-            <label>Email</label>
+            <label>Email<a style="color:red; font-size:large;">*</a></label>
             <input type="text" name="email" class="form-control" id="email">
             <small id="emailError" class="err"></small>
         </div>
         <div class="form-group">
-            <label>Password</label>
+            <label>Password<a style="color:red; font-size:large;">*</a></label>
             <input type="password" name="password" class="form-control" id="password">
             <small id="passwordError" class="err"></small>
         </div>

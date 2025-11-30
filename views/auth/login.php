@@ -13,12 +13,12 @@
 
     <form action="index.php?page=login" method="POST">
         <div class="form-group">
-            <label>Email Address</label>
+            <label>Email Address<a style="color:red; font-size:large;">*</a></label>
             <input type="text" id="email" name="email" class="form-control" placeholder="contoh@email.com">
             <small id="emailError" class="err"></small>
         </div>
         <div class="form-group">
-            <label>Password</label>
+            <label>Password<a style="color:red; font-size:large;">*</a></label>
             
             <div style="position: relative;">
                 <input type="password" name="password" id="passInput" class="form-control" placeholder="******">

@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <label>Email Address</label>
-            <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>" id="email">
+            <input type="text" name="email" class="form-control" value="<?= $user['email'] ?>" id="email">
             <small id="emailError" class="err"></small>
         </div>
 

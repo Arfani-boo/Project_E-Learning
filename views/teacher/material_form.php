@@ -11,17 +11,20 @@
         <input type="hidden" name="chapter_id" value="<?= $_GET['chapter_id'] ?>">
 
         <div class="form-group">
-            <label>Judul Materi</label>
-            <input type="text" name="title" class="form-control" required placeholder="Misal: Penjelasan Tenses (Video)">
+            <label>Judul Materi<a style="color:red; font-size:large;">*</a></label>
+            <input type="text" name="title" class="form-control" id="materi" placeholder="Misal: Penjelasan Tenses (Video)">
+            <small id="materiError" class="err"></small>
         </div>
 
         <div class="form-group">
-            <label>Tipe Konten</label>
+            <label>Tipe Konten<a style="color:red; font-size:large;">*</a></label>
             <select name="type" id="inputType" class="form-control" onchange="toggleInputMateri()">
+                <option value="">--- Klik Untuk Memilih Tipe Konten Materi Anda ---</option>
                 <option value="video">📺 Video (YouTube / Link)</option>
                 <option value="audio">🎧 Audio (MP3 Link)</option>
                 <option value="text">📝 Reading / Teks Bacaan</option>
             </select>
+            <small id="kontenError" class="err"></small>
         </div>
 
         <div class="form-group" id="groupUrl">
@@ -49,6 +52,18 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+        const judul   = document.getElementById('materi').value.trim();
+        const inp   = document.getElementById('inputType').value.trim();
+        let ok = true;
+        if (!validateCourseTitle(judul)) {ok = false};
+        if (!validateTypeKonten(inp)) {ok = false};
+        if (!ok){e.preventDefault()};
+    });
+});
 function toggleInputMateri() {
     var tipe = document.getElementById('inputType').value;
     var groupUrl = document.getElementById('groupUrl');
@@ -64,6 +79,7 @@ function toggleInputMateri() {
         groupText.style.display = 'none';
     }
 }
+
 </script>
 
 <?php include 'views/layouts/footer.php'; ?>

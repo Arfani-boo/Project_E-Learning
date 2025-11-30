@@ -99,3 +99,102 @@ function validateClassTitle(kelas){
     clearError("judulError");
     return true;
 }
+
+function validateCourseTitle(materi){
+    if(!materi){
+        showError("materiError","Judul Materi Wajib Di Isi");
+        return false;
+    }
+    clearError("materiError");
+    return true;
+}
+
+function validateBabTitle(bab){
+    if(!bab){
+        showError("babError","Judul Bab Wajib Di Isi");
+        return false;
+    }
+    clearError("babError");
+    return true;
+}
+
+function validateUrutanB(bab){
+    const regexbab = /^\d+$/;
+    if(!bab){
+        showError("urutBabError","Urutan Bab Wajib Di Isi");
+        return false;
+    }
+    if (!regexbab.test(bab)) {
+        showError('urutBabError', 'Hanya Boleh menggunakan angka');
+        return false;
+    }
+    clearError("urutBabError");
+    return true;
+}
+
+function validateTypeKonten(konten) {
+    if (!konten) {
+        showError('kontenError', 'Setidaknya Memilih Satu Konten Pembelajaran');
+        return false;
+    }
+    clearError('kontenError');
+    return true;
+}
+
+function validateSoal(des){
+    if (!des) {
+        showError('soalError', 'Pertanyaan Wajib Di Isi');
+        return false;
+    }
+    if (des.length < 3){
+        showError('soalError', 'Setidaknya memiliki 3 karakter');
+        return false;
+    }
+    clearError('soalError');
+    return true;
+}
+
+function validateNilai(nilai){
+    const regexNilai = /^\d+$/;
+    if(!nilai){
+        showError("nilaiError","Nilai Wajib Di Isi");
+        return false;
+    }
+    if (!regexNilai.test(nilai)) {
+        showError('nilaiError', 'Hanya Boleh menggunakan angka');
+        return false;
+    }
+    clearError("nilaiError");
+    return true;
+}
+
+function validatePilgan(soal){
+    if(!soal){
+        showError("pilganError","Silahkan Isi Jawaban Multi-choice Ini");
+        return false;
+    }
+    clearError("pilganError");
+    return true;
+}
+
+function validatePilganMurid(soal){
+    if(!soal){
+        showError("pilgan1Error","Anda belum memilih jawaban yang tersedia");
+        return false;
+    }
+    clearError("pilgan1Error");
+    return true;
+}
+
+function validateEsai(des){
+    if (!des) {
+        showError('esaiError', 'Jawaban Wajib Di Isi');
+        return false;
+    }
+    if (des.length < 3){
+        showError('esaiError', 'Setidaknya memiliki 3 karakter');
+        return false;
+    }
+    clearError('esaiError');
+    return true;
+}
