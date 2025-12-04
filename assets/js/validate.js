@@ -9,6 +9,7 @@ function showError(elementId, message) {
 }
 
 //Fungsi Validasi ni wok
+// hitam lho ya
 
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
