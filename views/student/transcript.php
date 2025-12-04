@@ -1,5 +1,166 @@
-<?php include 'views/layouts/header.php'; ?>
+<?php
+include 'header.php';
+?>
 
+<style>
+/* ===========================================
+   CARD UTAMA
+=========================================== */
+.card {
+    background: #ffffff;
+    padding: 25px 28px;
+    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    margin-top: 20px;
+}
+
+/* Header card */
+.card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 3px;
+}
+
+.card p {
+    margin: 0;
+    color: #7a7a7a;
+}
+
+/* Tombol Kembali */
+.card .btn {
+    background: #eef1f4;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    transition: .2s;
+}
+
+.card .btn:hover {
+    background: #e2e5e9;
+}
+
+/* Garis pembatas */
+.card hr {
+    margin: 18px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+/* ===========================================
+   TABEL
+=========================================== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.96rem;
+    color: #2c3e50;
+}
+
+/* Header tabel */
+.table thead tr {
+    background: #f6f7f9;
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.table th {
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Body tabel */
+.table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Hover row */
+.table tbody tr:hover {
+    background: #f9fafc;
+}
+
+/* Kolom nilai lebih menonjol */
+.table td b {
+    color: #2c3e50;
+}
+
+/* ===========================================
+   BADGE STATUS
+=========================================== */
+.badge {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* Lulus */
+.bg-green {
+    background: #2ecc71;
+    color: #fff !important;
+}
+
+/* Remidi */
+.bg-red {
+    background: #e74c3c;
+    color: #fff !important;
+}
+
+/* Menunggu koreksi */
+.bg-wait {
+    background: #f1c40f;
+    color: #333 !important;
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        padding: 10px 8px;
+    }
+
+    .table td {
+        border: none;
+        padding: 8px 10px;
+        position: relative;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #777;
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.85rem;
+    }
+}
+
+</style>
 <div class="container">
     <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center;">

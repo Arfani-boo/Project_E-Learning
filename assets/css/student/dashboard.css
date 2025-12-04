@@ -1,0 +1,318 @@
+/* --- 1. RESET & BASIC --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+body {
+    background-color: #f4f7f6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    color: #34495e;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+button {
+    font-family: inherit;
+}
+
+/* --- NAVBAR DIHAPUS --- */
+
+/* --- 3. PROFIL SECTION (masih dipakai kalau di header) --- */
+.profile-container {
+    position: relative;
+}
+.profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 30px;
+    transition: background-color 0.2s;
+}
+.profile-trigger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.user-greeting {
+    font-size: 14px;
+    color: #ecf0f1;
+}
+.profile-icon-wrap {
+    width: 38px;
+    height: 38px;
+    background-color: #34495e;
+    border: 2px solid #ecf0f1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-user-icon {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 1000;
+    border: 1px solid #eee;
+    animation: slideDown 0.2s ease;
+}
+.profile-dropdown.show {
+    display: block;
+}
+.dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    color: #34495e;
+    font-size: 14px;
+}
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #3498db;
+}
+.dropdown-item.danger {
+    color: #e74c3c;
+    border-top: 1px solid #eee;
+}
+.dropdown-item.danger:hover {
+    background-color: #fff5f5;
+}
+
+/* --- 4. STYLE KARTU --- */
+.section {
+    flex: 1;
+    width: 100%;
+    max-width: 1150px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+.course-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+.info {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    min-height: 180px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+    border: 1px solid #eaeaea;
+    border-left: 5px solid #3498db;
+}
+.info:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info.blue {
+    border-left-color: #2ecc71;
+}
+.info.cream {
+    border-left-color: #f1c40f;
+}
+.info.purple {
+    border-left-color: #9b59b6;
+}
+
+.info-l {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    cursor: pointer;
+}
+.info-user {
+    flex-shrink: 0;
+}
+.icon-course {
+    width: 55px;
+    height: 55px;
+    opacity: 0.9;
+}
+
+.info-subject {
+    flex-grow: 1;
+    padding-right: 30px;
+}
+.subject-name {
+    margin-bottom: 6px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+.subject-description {
+    font-size: 13px;
+    color: #95a5a6;
+    margin-bottom: 15px;
+}
+
+.progress-container {
+    width: 100%;
+}
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.progress-track {
+    width: 100%;
+    height: 6px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 10px;
+    transition: width 0.5s;
+}
+
+.info.blue .progress-fill {
+    background-color: #2ecc71;
+}
+.info.cream .progress-fill {
+    background-color: #f1c40f;
+}
+.info.purple .progress-fill {
+    background-color: #9b59b6;
+}
+
+.card-menu-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #bdc3c7;
+    transition: 0.2s;
+    z-index: 10;
+}
+.card-menu-btn:hover {
+    background-color: #f0f2f5;
+    color: #2c3e50;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 20;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+.card-overlay.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+}
+.overlay-text {
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #2c3e50;
+}
+.btn-action {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+}
+.btn-cancel {
+    background: #ecf0f1;
+    color: #7f8c8d;
+    margin-left: 5px;
+}
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+    margin-right: 5px;
+}
+
+.empty-state {
+    grid-column: span 2;
+    text-align: center;
+    padding: 40px;
+    color: #7f8c8d;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+    .user-greeting {
+        display: none;
+    }
+    .nav-brand {
+        font-size: 18px;
+    }
+}
+
+.info-user img {
+    width: 90px;
+    height: auto;
+    display: block;
+}

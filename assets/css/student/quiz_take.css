@@ -1,0 +1,168 @@
+/* ================================
+   GLOBAL
+================================ */
+body {
+    background: #f7f9fc;
+    font-family: "Inter", sans-serif;
+}
+
+/* Container utama */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* ================================
+   CARD GENERIC
+================================ */
+.card {
+    background: #fff;
+    padding: 22px 25px;
+    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+    transition: 0.25s;
+}
+
+.card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Header/Ujian Title */
+.card h2 {
+    margin-bottom: 8px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.card p {
+    color: #7a7a7a;
+}
+
+/* ================================
+   STICKY TOP PROGRESS
+================================ */
+.sticky-quiz {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.progress-outer {
+    background: #ececec;
+    height: 10px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+#progressBarQuiz {
+    background: #e67e22;
+    height: 100%;
+    width: 0%;
+    transition: width 0.35s ease-in-out;
+}
+
+/* ================================
+   CARD SOAL
+================================ */
+.card-soal {
+    border-left: 4px solid #ddd !important;
+}
+
+.card-soal h4 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+/* Teks soal */
+.card-soal .question-text {
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+}
+
+/* ================================
+   OPTION / MULTIPLE CHOICE
+================================ */
+.option-label {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.option-label:hover {
+    background: #f0f3f7;
+    border-color: #c9c9c9;
+}
+
+/* Radio kecil */
+.option-label input[type="radio"] {
+    transform: scale(1.2);
+}
+
+/* ================================
+   TEXTAREA JAWAB ESAY
+================================ */
+textarea.form-control {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    resize: vertical;
+    line-height: 1.5;
+    background: #fafafa;
+    transition: 0.25s;
+}
+
+textarea.form-control:focus {
+    border-color: #3498db;
+    background: #fff;
+    outline: none;
+}
+
+/* ================================
+   BUTTON KIRIM
+================================ */
+.btn-primary {
+    background: #3498db;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #2d89c6;
+    transform: scale(0.98);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .card {
+        padding: 18px;
+    }
+    .card-soal h4 {
+        font-size: 1.15rem;
+    }
+    .option-label {
+        padding: 10px;
+    }
+}
