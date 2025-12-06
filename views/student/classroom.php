@@ -1,13 +1,13 @@
 <?php
 include "header.php"; ?>
-<link rel="stylesheet" href="http://localhost/Project_E-Learning/assets/css/student/classroom.css">
+<link rel="stylesheet" href="assets/css/student/classroom.css">
 
 
 <div class="container">
 
     <div class="sticky-bar">
         <a href="index.php?page=course_detail&id=<?= $course_id ?>">
-            <img src="http://localhost/Project_E-Learning/assets/image/arrow-left.svg" width="45px">
+            <img src="assets/image/arrow-left.svg" width="45px">
         </a>
         <div>
             <small style="color: #6b7280; display: block;">Sedang mempelajari:</small>

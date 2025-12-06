@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost/Project_E-Learning/assets/css/student/dashboard.css">
+<link rel="stylesheet" href="assets/css/student/dashboard.css">
 
 </head>
 <body>
@@ -69,7 +69,7 @@ include "header.php";
                     "id"
                 ] ?>" class="info-l">
                     <div class="info-user">
-                        <img src="http://localhost/Project_E-Learning/assets/image/book-icon.svg">
+                        <img src="assets/image/book-icon.svg">
                     </div>
                     <div class="info-subject">
                         <div class="subject-name"><?= htmlspecialchars(

@@ -1,6 +1,6 @@
 <?php
 include "header.php"; ?>
-<link rel="stylesheet" href="http://localhost/Project_E-Learning/assets/css/student/quiz_take.css">
+<link rel="stylesheet" href="assets/css/student/quiz_take.css">
 
 <div style="position: sticky; top: 0; z-index: 1000; background: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px;">
     <div class="container">

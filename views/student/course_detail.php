@@ -1,6 +1,6 @@
 <?php
 include "header.php"; ?>
-<link rel="stylesheet" href="http://localhost/Project_E-Learning/assets/css/student/course_detail.css">
+<link rel="stylesheet" href="assets/css/student/course_detail.css">
 
 <div class="container">
 
@@ -60,6 +60,7 @@ include "header.php"; ?>
 
                             <?php while ($k = mysqli_fetch_assoc($q_kuis)): ?>
                                 <?php // Cek Status: Apakah siswa sudah pernah mengerjakan?
+                                // Cek Status: Apakah siswa sudah pernah mengerjakan?
                                 // Fungsi cekStatusKuis ada di QuizModel.php
                                 $sudah_kerja = cekStatusKuis(
                                     $koneksi,

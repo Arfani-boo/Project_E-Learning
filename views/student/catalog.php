@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 ?>
-<link rel="stylesheet" href="http://localhost/Project_E-Learning/assets/css/student/catalog.css">
+<link rel="stylesheet" href="assets/css/student/catalog.css">
 
 <div class="container">
 
