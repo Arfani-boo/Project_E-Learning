@@ -92,7 +92,9 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="#" style="color: red; text-decoration: none;">Hapus</a>
+                                    <a href="index.php?page=profile&edit_teacher=<?= $row['id'] ?>&back=manage_teachers" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="index.php?page=manage_teachers&hapus_id=<?= $row['id'] ?>" 
+   onclick="return confirm('Yakin hapus guru ini? Semua kursus & nilai akan hilang.')" style="color: red; text-decoration: none;">Hapus</a>
                                 </td>
                             </tr>
                             <?php endwhile; ?>

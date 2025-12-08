@@ -89,5 +89,30 @@ function updateDataUser($koneksi, $id, $data) {
     return mysqli_query($koneksi, $query);
 }
 
+function updateGuruManual($koneksi, $id, $full_name, $email, $school_id, $password = null) {
+    $email = mysqli_real_escape_string($koneksi, $email);
+    $cek   = mysqli_query($koneksi, "SELECT id FROM users WHERE email='$email' AND id<>$id");
+    if (mysqli_num_rows($cek)) {
+        return "Email sudah digunakan oleh user lain.";
+    }
+
+    $full_name = mysqli_real_escape_string($koneksi, $full_name);
+    $school_id = intval($school_id);
+
+    $set = "full_name = '$full_name',
+            email     = '$email',
+            school_id = $school_id";
+
+    if (!empty($password)) {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $set .= ", password_hash = '" . mysqli_real_escape_string($koneksi, $hash) . "'";
+    }
+    $created="SELECT create_at FROM users WHERE id=$id";
+    $sql = "UPDATE users SET $set WHERE id = $id";
+    echo "SQL: $sql<br>Error: " . mysqli_error($koneksi);
+    $ok  = mysqli_query($koneksi, $sql);
+
+    return $ok ? true : mysqli_error($koneksi);
+}
 ?>
 

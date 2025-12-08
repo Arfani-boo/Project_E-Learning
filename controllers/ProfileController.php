@@ -4,14 +4,69 @@ require_once 'models/UserModel.php';
 require_once 'models/SchoolModel.php';
 
 function editProfile($koneksi) {
-    if (!isset($_SESSION['user_id'])) { header("Location: index.php?page=login"); exit; }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_teacher'])) {
+        $id   = intval($_POST['id']);
+        $nama = $_POST['full_name'] ?? '';
+        $email= $_POST['email']      ?? '';
+        $sekolah = intval($_POST['school_id'] ?? 0);
+        $pass  = $_POST['password']  ?? '';
+
+        $err = updateGuruManual($koneksi, $id, $nama, $email, $sekolah, $pass);
+        
+        if ($err !== true) {
+            $_SESSION['error'] = $err;
+            header("Location: index.php?page=profile&edit_teacher=$id&back=" . $_POST['back']);
+            exit;
+        }
+        
+        $back = $_POST['back'] ?? 'manage_teachers';
+        echo "<script>alert('Data guru berhasil diperbarui!'); window.location='index.php?page=$back';</script>";
+        exit;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_school'])) {
+        $id   = intval($_POST['id']);
+        $name = mysqli_real_escape_string($koneksi, $_POST['name']);
+        $addr = mysqli_real_escape_string($koneksi, $_POST['address'] ?? '');
+        
+        $result = mysqli_query($koneksi, "UPDATE schools SET name='$name', address='$addr' WHERE id=$id");
+        
+        if ($result) {
+            $back = $_POST['back'] ?? 'manage_schools';
+            echo "<script>alert('Data sekolah berhasil diperbarui!'); window.location='index.php?page=$back';</script>";
+            exit;
+        } else {
+            $_SESSION['error'] = "Gagal update sekolah: " . mysqli_error($koneksi);
+            header("Location: index.php?page=profile&edit_school=$id&back=" . $_POST['back']);
+            exit;
+        }
+    }
+
+    if (isset($_GET['edit_teacher'])) {
+        $id     = intval($_GET['edit_teacher']);
+        $user   = ambilUserById($koneksi, $id);
+        $daftar_sekolah = ambilSemuaSekolah($koneksi);
+        $kembali_ke = $_GET['back'] ?? 'manage_teachers';
+        require 'views/profile/edit.php';
+        exit;
+    }
+
+    if (isset($_GET['edit_school'])) {
+        $id     = intval($_GET['edit_school']);
+        $school = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM schools WHERE id=$id")); // data sekolah
+        $kembali_ke = $_GET['back'] ?? 'manage_schools';
+        require 'views/profile/edit.php';
+        exit;
+    }
     
+    if (!isset($_SESSION['user_id'])) { header("Location: index.php?page=login"); exit; }
+
     $id_user = $_SESSION['user_id'];
     $role_user = $_SESSION['role'];
 
     // 1. TANGKAP ASAL HALAMAN (Default ke dashboard jika kosong)
     // Cek dari POST (saat submit) atau GET (saat baru buka)
-    $kembali_ke = isset($_POST['from']) ? $_POST['from'] : (isset($_GET['from']) ? $_GET['from'] : 'dashboard');
 
     // PROSES SIMPAN PERUBAHAN
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,11 +81,9 @@ function editProfile($koneksi) {
 
         if (updateDataUser($koneksi, $id_user, $data)) {
             // UPDATE: Redirect dinamis sesuai asal halaman
-            echo "<script>
-                    alert('Profil berhasil diperbarui!'); 
-                    window.location='index.php?page=$kembali_ke';
-                  </script>";
-            exit; // Penting di stop disini
+            $from = $_POST['from'] ?? 'dashboard';   // ← UBAH ini
+    echo "<script>alert('Profil berhasil diperbarui!'); window.location='index.php?page=$from';</script>";
+    exit; // Penting di stop disini
         } else {
             $error = "Gagal mengupdate profil.";
         }

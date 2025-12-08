@@ -36,6 +36,31 @@ function manageTeachers($koneksi) {
         header("Location: index.php?page=manage_teachers");
         exit;
     }
+    
+    if (isset($_GET['hapus_id'])) {
+        $id = intval($_GET['hapus_id']);
+        mysqli_query($koneksi, "DELETE FROM users WHERE id=$id");
+        header("Location: index.php?page=manage_teachers");
+        exit;
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_teacher_manual'])) {
+        $id    = intval($_POST['id']);
+        $nama  = $_POST['nama'];
+        $email = $_POST['email'];
+        $telp  = $_POST['telp'];
+        $alamat= $_POST['alamat'];
+
+        $err = updateTeacherManual($koneksi, $id, $nama, $email, $telp, $alamat);
+        if ($err !== true) {
+            $_SESSION['error'] = $err;
+            header("Location: index.php?page=manage_teachers&edit_id=$id");
+            exit;
+        }
+
+        header("Location: index.php?page=manage_teachers&pesan=updated");
+        exit;
+    }
 
     require 'views/admin/manage_teachers.php';
 }

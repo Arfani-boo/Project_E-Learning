@@ -6,6 +6,18 @@
     <title>English LMS Pro</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <?php
+    // Allow pages to inject additional stylesheets by setting $page_css (string) or
+    // $page_css_arr (array) before including this header.
+    if (!empty($page_css)) {
+        echo '<link rel="stylesheet" href="' . htmlspecialchars($page_css) . '">';
+    }
+    if (!empty($page_css_arr) && is_array($page_css_arr)) {
+        foreach ($page_css_arr as $css) {
+            echo '<link rel="stylesheet" href="' . htmlspecialchars($css) . '">';
+        }
+    }
+    ?>
 </head>
 <body>
     <nav class="navbar">
