@@ -56,9 +56,10 @@ include 'header.php';
                     </button>
                 <?php else: ?>
                     <a href="index.php?page=catalog&join_id=<?= $c['id'] ?>"
-                       class="btn btn-success btn-block"
-                       onclick="return confirm('Yakin ingin bergabung ke kelas &quot;<?= $c['title'] ?>&quot;?')">
-                       Gabung Kelas 🚀
+                    class="btn btn-success btn-block"
+                    style="background-color: #1ae827; color: white; display: block; text-align: center;" 
+                    onclick="return confirm('Yakin ingin bergabung ke kelas &quot;<?= $c['title'] ?>&quot;?')">
+                    Gabung Kelas 🚀
                     </a>
                 <?php endif; ?>
             </div>
