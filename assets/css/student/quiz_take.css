@@ -1,13 +1,11 @@
 /* ================================
    GLOBAL
 ================================ */
-body {
-    background: #f7f9fc;
-    font-family: "Inter", sans-serif;
-}
+/* Removed body selector - it was overriding global styles */
+
 
 /* Container utama */
-.container {
+.student-container {
     max-width: 1100px;
     margin: auto;
     padding: 0 20px;
@@ -16,7 +14,7 @@ body {
 /* ================================
    CARD GENERIC
 ================================ */
-.card {
+.student-container .card {
     background: #fff;
     padding: 22px 25px;
     border-radius: 14px;
@@ -26,19 +24,19 @@ body {
     transition: 0.25s;
 }
 
-.card:hover {
+.student-container .card:hover {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* Header/Ujian Title */
-.card h2 {
+.student-container .card h2 {
     margin-bottom: 8px;
     font-size: 1.8rem;
     font-weight: 700;
     color: #2c3e50;
 }
 
-.card p {
+.student-container .card p {
     color: #7a7a7a;
 }
 
@@ -55,14 +53,14 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.progress-outer {
+.student-container .progress-outer {
     background: #ececec;
     height: 10px;
     border-radius: 50px;
     overflow: hidden;
 }
 
-#progressBarQuiz {
+.student-container #progressBarQuiz {
     background: #e67e22;
     height: 100%;
     width: 0%;
@@ -72,18 +70,18 @@ body {
 /* ================================
    CARD SOAL
 ================================ */
-.card-soal {
+.student-container .card-soal {
     border-left: 4px solid #ddd !important;
 }
 
-.card-soal h4 {
+.student-container .card-soal h4 {
     font-size: 1.3rem;
     margin-bottom: 15px;
     color: #34495e;
 }
 
 /* Teks soal */
-.card-soal .question-text {
+.student-container .card-soal .question-text {
     font-size: 1.15rem;
     margin-bottom: 20px;
 }
@@ -91,7 +89,7 @@ body {
 /* ================================
    OPTION / MULTIPLE CHOICE
 ================================ */
-.option-label {
+.student-container .option-label {
     padding: 12px 14px;
     border: 1px solid #ddd;
     background: #fafafa;
@@ -103,20 +101,20 @@ body {
     transition: 0.2s;
 }
 
-.option-label:hover {
+.student-container .option-label:hover {
     background: #f0f3f7;
     border-color: #c9c9c9;
 }
 
 /* Radio kecil */
-.option-label input[type="radio"] {
+.student-container .option-label input[type="radio"] {
     transform: scale(1.2);
 }
 
 /* ================================
    TEXTAREA JAWAB ESAY
 ================================ */
-textarea.form-control {
+.student-container textarea.form-control {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
@@ -127,7 +125,7 @@ textarea.form-control {
     transition: 0.25s;
 }
 
-textarea.form-control:focus {
+.student-container textarea.form-control:focus {
     border-color: #3498db;
     background: #fff;
     outline: none;
@@ -136,7 +134,7 @@ textarea.form-control:focus {
 /* ================================
    BUTTON KIRIM
 ================================ */
-.btn-primary {
+.student-container .btn-primary {
     background: #3498db;
     color: white;
     padding: 12px 22px;
@@ -147,7 +145,7 @@ textarea.form-control:focus {
     transition: 0.2s;
 }
 
-.btn-primary:hover {
+.student-container .btn-primary:hover {
     background: #2d89c6;
     transform: scale(0.98);
 }
@@ -156,13 +154,15 @@ textarea.form-control:focus {
    RESPONSIVE
 ================================ */
 @media (max-width: 768px) {
-    .card {
+    .student-container .card {
         padding: 18px;
     }
-    .card-soal h4 {
+
+    .student-container .card-soal h4 {
         font-size: 1.15rem;
     }
-    .option-label {
+
+    .student-container .option-label {
         padding: 10px;
     }
 }

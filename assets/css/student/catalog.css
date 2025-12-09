@@ -1,31 +1,16 @@
-.main-content, .card {
-    animation: fadeInUp 0.6s
-ease-out forwards;
-}
-.card {
+/* Removed Global Reset - Handled by style.css */
+
+.student-container .card {
     background: white;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     margin-bottom: 1rem;
     border: 1px solid #eee;
-    transition: transform 0.3s
-ease, box-shadow 0.3s
-ease, border-color 0.3s
-ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-user agent stylesheet
-div {
-    display: block;
-    unicode-bidi: isolate;
-}
-.btn {
+
+.student-container .btn {
     display: inline-block;
     padding: 12px 24px;
     border: none;
@@ -34,18 +19,10 @@ div {
     font-size: 1rem;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s
-ease;
+    transition: all 0.3s ease;
 }
-.main-content, .card {
-    animation: fadeInUp 0.6s
-ease-out forwards;
-}
-.main-content {
-    flex: 1;
-    padding: 2rem 0;
-}
-.container {
+
+.student-container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;

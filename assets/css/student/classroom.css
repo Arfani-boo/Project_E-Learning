@@ -1,11 +1,11 @@
-.container {
+.student-container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 0;
 }
 
-.sticky-bar {
+.student-container .sticky-bar {
     background: #fff;
     padding: 0.45rem 1rem;
     border-bottom: 1px solid #e5e7eb;
@@ -18,9 +18,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.sticky-bar a {
+.student-container .sticky-bar a {
     color: #374151;
-
     padding: 0.5rem 0.75rem;
     border-radius: 6px;
     display: flex;
@@ -30,11 +29,12 @@
     font-size: 0.9rem;
     transition: all 0.2s ease;
 }
-.sticky-bar a:hover {
+
+.student-container .sticky-bar a:hover {
     background: #e5e7eb;
 }
 
-.card {
+.student-container .card {
     background: #fff;
     border-radius: 12px;
     padding: 2rem;
@@ -43,7 +43,7 @@
     animation: fadeInUp 0.6s ease-out forwards;
 }
 
-.card-header {
+.student-container .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,13 +52,13 @@
     margin-bottom: 1.5rem;
 }
 
-.card-header h2 {
+.student-container .card-header h2 {
     margin: 0;
     font-size: 1.5rem;
     color: #111827;
 }
 
-.badge {
+.student-container .badge {
     background: #3b82f6;
     color: #fff;
     padding: 0.4rem 0.75rem;
@@ -68,14 +68,14 @@
     text-transform: uppercase;
 }
 
-.content-area {
+.student-container .content-area {
     min-height: 300px;
     font-size: 1rem;
     line-height: 1.6;
     color: #374151;
 }
 
-.btn {
+.student-container .btn {
     padding: 0.6rem 1rem;
     border-radius: 8px;
     border: none;
@@ -85,24 +85,26 @@
     transition: all 0.2s ease;
 }
 
-.btn-success {
+.student-container .btn-success {
     background: #10b981;
     color: #fff;
 }
-.btn-success:hover {
+
+.student-container .btn-success:hover {
     background: #059669;
 }
 
-.btn-danger {
+.student-container .btn-danger {
     background: #ef4444;
     color: #fff;
 }
-.btn-danger:hover {
+
+.student-container .btn-danger:hover {
     background: #dc2626;
 }
 
-audio,
-iframe {
+.student-container audio,
+.student-container iframe {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
@@ -112,6 +114,7 @@ iframe {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);

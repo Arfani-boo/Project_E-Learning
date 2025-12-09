@@ -1,14 +1,15 @@
 <?php
-include "header.php"; ?>
-<link rel="stylesheet" href="assets/css/student/quiz_take.css">
+$page_css = "assets/css/student/quiz_take.css";
+include 'views/layouts/header.php';
+?>
 
 <div style="position: sticky; top: 0; z-index: 1000; background: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px;">
-    <div class="container">
+    <div class="student-container">
         <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-            <small><b>Status Pengerjaan:</b></small>
+            <small><b>Work Status:</b></small>
             <small><span id="terjawab">0</span> / <span id="totalSoal"><?= count(
                 $soalList,
-            ) ?></span> Soal Terjawab</small>
+            ) ?></span> Questions Answered</small>
         </div>
         <div style="background: #eee; height: 10px; border-radius: 5px; overflow: hidden;">
             <div id="progressBarQuiz" style="background: #e67e22; height: 100%; width: 0%; transition: width 0.3s;"></div>
@@ -16,10 +17,10 @@ include "header.php"; ?>
     </div>
 </div>
 
-<div class="container">
+<div class="student-container">
     <div class="card" style="text-align: center; margin-top: 10px;">
-        <h2>📝 SEDANG MENGERJAKAN UJIAN</h2>
-        <p style="color: gray;">Jawablah pertanyaan di bawah ini dengan jujur.</p>
+        <h2>📝 TAKING EXAM</h2>
+        <p style="color: gray;">Answer the questions below honestly.</p>
     </div>
 
     <form action="" method="POST" id="formUjian">
@@ -32,7 +33,7 @@ include "header.php"; ?>
             ] ?>">
 
                 <h4 style="margin-bottom: 15px;">
-                    Soal No. <?= $no++ ?>
+                    Question No. <?= $no++ ?>
                     <!--<span style="font-weight: normal; font-size: 0.8rem; color: #888;">
                         (Tipe: <?= $s["question_type"] == "multiple_choice"
                             ? "Pilihan Ganda"
@@ -64,7 +65,7 @@ include "header.php"; ?>
                               class="form-control input-jawaban"
                               data-soalid="<?= $s["id"] ?>"
                               rows="5"
-                              placeholder="Ketik jawaban Anda di sini..."
+                              placeholder="Type your answer here..."
                               id="esai"></textarea>
                     <small id="esaiError" class="err"></small>
                 <?php endif; ?>
@@ -74,9 +75,9 @@ include "header.php"; ?>
         ?>
 
         <div class="card" style="text-align: center; background: #fdfdfe;">
-            <p>Pastikan semua bar oranye di atas sudah penuh!</p>
-            <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Yakin ingin mengumpulkan jawaban?')">
-                📤 Kumpulkan Jawaban Saya
+            <p>Make sure all orange bars above are full!</p>
+            <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Are you sure you want to submit your answers?')">
+                📤 Submit My Answers
             </button>
         </div>
 

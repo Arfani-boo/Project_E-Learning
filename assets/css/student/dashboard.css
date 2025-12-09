@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
+
 body {
     background-color: #f4f7f6;
     min-height: 100vh;
@@ -13,11 +14,13 @@ body {
     overflow-x: hidden;
     color: #34495e;
 }
+
 a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
 }
+
 button {
     font-family: inherit;
 }
@@ -28,6 +31,7 @@ button {
 .profile-container {
     position: relative;
 }
+
 .profile-trigger {
     display: flex;
     align-items: center;
@@ -37,13 +41,16 @@ button {
     border-radius: 30px;
     transition: background-color 0.2s;
 }
+
 .profile-trigger:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+
 .user-greeting {
     font-size: 14px;
     color: #ecf0f1;
 }
+
 .profile-icon-wrap {
     width: 38px;
     height: 38px;
@@ -54,6 +61,7 @@ button {
     justify-content: center;
     align-items: center;
 }
+
 .header-user-icon {
     width: 20px;
     height: 20px;
@@ -74,23 +82,28 @@ button {
     border: 1px solid #eee;
     animation: slideDown 0.2s ease;
 }
+
 .profile-dropdown.show {
     display: block;
 }
+
 .dropdown-item {
     display: block;
     padding: 12px 20px;
     color: #34495e;
     font-size: 14px;
 }
+
 .dropdown-item:hover {
     background-color: #f8f9fa;
     color: #3498db;
 }
+
 .dropdown-item.danger {
     color: #e74c3c;
     border-top: 1px solid #eee;
 }
+
 .dropdown-item.danger:hover {
     background-color: #fff5f5;
 }
@@ -103,6 +116,7 @@ button {
     margin: 40px auto;
     padding: 0 20px;
 }
+
 .course-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -126,6 +140,7 @@ button {
     border: 1px solid #eaeaea;
     border-left: 5px solid #3498db;
 }
+
 .info:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -134,9 +149,11 @@ button {
 .info.blue {
     border-left-color: #2ecc71;
 }
+
 .info.cream {
     border-left-color: #f1c40f;
 }
+
 .info.purple {
     border-left-color: #9b59b6;
 }
@@ -148,9 +165,11 @@ button {
     width: 100%;
     cursor: pointer;
 }
+
 .info-user {
     flex-shrink: 0;
 }
+
 .icon-course {
     width: 55px;
     height: 55px;
@@ -161,12 +180,14 @@ button {
     flex-grow: 1;
     padding-right: 30px;
 }
+
 .subject-name {
     margin-bottom: 6px;
     font-size: 20px;
     font-weight: 700;
     color: #2c3e50;
 }
+
 .subject-description {
     font-size: 13px;
     color: #95a5a6;
@@ -176,6 +197,7 @@ button {
 .progress-container {
     width: 100%;
 }
+
 .progress-label {
     display: flex;
     justify-content: space-between;
@@ -186,6 +208,7 @@ button {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .progress-track {
     width: 100%;
     height: 6px;
@@ -193,6 +216,7 @@ button {
     border-radius: 10px;
     overflow: hidden;
 }
+
 .progress-fill {
     height: 100%;
     background-color: #3498db;
@@ -203,9 +227,11 @@ button {
 .info.blue .progress-fill {
     background-color: #2ecc71;
 }
+
 .info.cream .progress-fill {
     background-color: #f1c40f;
 }
+
 .info.purple .progress-fill {
     background-color: #9b59b6;
 }
@@ -225,6 +251,7 @@ button {
     transition: 0.2s;
     z-index: 10;
 }
+
 .card-menu-btn:hover {
     background-color: #f0f2f5;
     color: #2c3e50;
@@ -244,16 +271,19 @@ button {
     align-items: center;
     border-radius: 8px;
 }
+
 .card-overlay.active {
     display: flex;
     animation: fadeIn 0.2s ease;
 }
+
 .overlay-text {
     font-weight: 600;
     margin-bottom: 15px;
     font-size: 16px;
     color: #2c3e50;
 }
+
 .btn-action {
     padding: 8px 16px;
     border-radius: 4px;
@@ -262,11 +292,13 @@ button {
     border: none;
     cursor: pointer;
 }
+
 .btn-cancel {
     background: #ecf0f1;
     color: #7f8c8d;
     margin-left: 5px;
 }
+
 .btn-delete {
     background: #e74c3c;
     color: white;
@@ -280,20 +312,78 @@ button {
     color: #7f8c8d;
 }
 
+/* Add Course Card */
+.add-course-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%) !important;
+    border: 2px dashed #bdc3c7 !important;
+    border-left: 2px dashed #bdc3c7 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.add-course-card:hover {
+    border-color: #3498db !important;
+    background: linear-gradient(135deg, #ebf5fb 0%, #ffffff 100%) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.15);
+}
+
+.add-course-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.add-course-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.add-course-card:hover .add-course-icon {
+    transform: rotate(90deg) scale(1.1);
+}
+
+.add-course-text .subject-name {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.add-course-text .subject-description {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
 @keyframes slideDown {
     from {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -303,9 +393,11 @@ button {
     .course-grid {
         grid-template-columns: 1fr;
     }
+
     .user-greeting {
         display: none;
     }
+
     .nav-brand {
         font-size: 18px;
     }

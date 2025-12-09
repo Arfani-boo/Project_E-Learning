@@ -1,16 +1,17 @@
 <?php
-include "header.php"; ?>
-<link rel="stylesheet" href="assets/css/student/classroom.css">
+$page_css = "assets/css/student/classroom.css";
+include "views/layouts/header.php";
+?>
 
 
-<div class="container">
+<div class="student-container">
 
     <div class="sticky-bar">
         <a href="index.php?page=course_detail&id=<?= $course_id ?>">
             <img src="assets/image/arrow-left.svg" width="45px">
         </a>
         <div>
-            <small style="color: #6b7280; display: block;">Sedang mempelajari:</small>
+            <small style="color: #6b7280; display: block;">Currently studying:</small>
             <h4 style="margin: 0; color:#111827;"><?= $materi["title"] ?></h4>
         </div>
     </div>
@@ -54,7 +55,7 @@ include "header.php"; ?>
                         <source src="<?= $materi[
                             "content_url"
                         ] ?>" type="audio/mpeg">
-                        Browser Anda tidak mendukung elemen audio.
+                        Browser does not support audio element.
                     </audio>
                 </div>
             <?php endif; ?>
@@ -71,12 +72,12 @@ include "header.php"; ?>
 
             <?php if ($is_complete): ?>
                 <button type="submit" name="mark_incomplete" class="btn btn-danger">
-                    ❌ Tandai Belum Selesai
+                    ❌ Mark Incomplete
                 </button>
-                <span style="color: #10b981; margin-left: 10px;">✅ Sudah dipelajari</span>
+                <span style="color: #10b981; margin-left: 10px;">✅ Already studied</span>
             <?php else: ?>
                 <button type="submit" name="mark_complete" class="btn btn-success">
-                    ✅ Tandai Sudah Selesai
+                    ✅ Mark Complete
                 </button>
             <?php endif; ?>
         </form>

@@ -1,14 +1,15 @@
 <?php
-include "header.php"; ?>
-<link rel="stylesheet" href="assets/css/student/course_detail.css">
+$page_css = "assets/css/student/course_detail.css";
+include "views/layouts/header.php";
+?>
 
-<div class="container">
+<div class="student-container">
 
     <div class="card" style="background: linear-gradient(to right, #2c3e50, #4ca1af); color: white;">
         <h1><?= $course["title"] ?></h1>
         <p><?= $course["description"] ?></p>
         <div style="margin-top: 10px;">
-             <a href="index.php?page=dashboard" class="btn" style="background: rgba(255,255,255,0.2); color: white;">⬅ Kembali ke Dashboard</a>
+             <a href="index.php?page=dashboard" class="btn" style="background: rgba(255,255,255,0.2); color: white;">⬅ Back to Dashboard</a>
         </div>
     </div>
 
@@ -56,10 +57,11 @@ include "header.php"; ?>
 
                     if (mysqli_num_rows($q_kuis) > 0): ?>
                         <div style="margin-top: 15px; border-top: 2px dashed #eee; padding-top: 15px;">
-                            <small style="font-weight: bold; color: #555; display: block; margin-bottom: 5px;">LATIHAN & KUIS:</small>
+                            <small style="font-weight: bold; color: #555; display: block; margin-bottom: 5px;">EXERCISES & QUIZZES:</small>
 
                             <?php while ($k = mysqli_fetch_assoc($q_kuis)): ?>
                                 <?php // Cek Status: Apakah siswa sudah pernah mengerjakan?
+                                // Cek Status: Apakah siswa sudah pernah mengerjakan?
                                 // Cek Status: Apakah siswa sudah pernah mengerjakan?
                                 // Fungsi cekStatusKuis ada di QuizModel.php
                                 $sudah_kerja = cekStatusKuis(
@@ -77,7 +79,7 @@ include "header.php"; ?>
                                         ] ?></span>
 
                                         <?php if ($sudah_kerja): ?>
-                                            <span class="badge bg-green">✅ Selesai</span>
+                                            <span class="badge bg-green">✅ Completed</span>
                                         <?php endif; ?>
                                     </div>
 
@@ -86,9 +88,9 @@ include "header.php"; ?>
                                             "id"
                                         ] ?>"
                                            class="btn"
-                                           onclick="return confirm('⚠️ PERHATIAN:\n\nApakah Anda ingin mengerjakan ulang kuis ini?\nNilai lamamu akan DIHAPUS dan diganti dengan nilai baru.\n\nLanjutkan?')"
+                                           onclick="return confirm('⚠️ WARNING:\n\nDo you want to retake this quiz?\nYour old score will be DELETED and replaced with the new one.\n\nContinue?')"
                                            style="background: #95a5a6; color: white; font-size: 0.8rem; padding: 5px 15px;">
-                                           🔄 Kerjakan Kembali
+                                           🔄 Retake Quiz
                                         </a>
                                     <?php else: ?>
                                         <a href="index.php?page=take_quiz&quiz_id=<?= $k[
@@ -96,7 +98,7 @@ include "header.php"; ?>
                                         ] ?>"
                                            class="btn"
                                            style="background: #9b59b6; color: white; font-size: 0.8rem; padding: 5px 15px;">
-                                           ▶ Mulai Kuis
+                                           ▶ Start Quiz
                                         </a>
                                     <?php endif; ?>
 
@@ -125,8 +127,8 @@ include "header.php"; ?>
                 $warna_bar = $persen < 50 ? "#f39c12" : "#2ecc71";
                 ?>
 
-                <p style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">
-                    <?= $persen ?>% <span style="font-size: 0.9rem; font-weight: normal; color: gray;">Selesai</span>
+                <p style="font-size: 1.5rem; font-weight: bold; margin: 10px 0; color: #2c3e50;">
+                    <?= $persen ?>% <span style="font-size: 0.9rem; font-weight: normal; color: gray;">Completed</span>
                 </p>
 
                 <div style="background: #eee; height: 10px; border-radius: 5px; margin-bottom: 15px; overflow: hidden;">
@@ -134,14 +136,14 @@ include "header.php"; ?>
                 </div>
 
                 <hr>
-                <p style="font-size: 0.9rem; color: #555;">Selesaikan semua materi dan kuis untuk mendapatkan nilai akhir.</p>
+                <p style="font-size: 0.9rem; color: #555;">Complete all materials and quizzes to get your final grade.</p>
                 <br>
 
                 <a href="index.php?page=student_transcript&course_id=<?= $course[
                     "id"
                 ] ?>"
                    class="btn btn-block"
-                   style="border: 1px solid #ccc; background: #fff; color: #333; text-align: center;">
+                   style="border: 1px solid #ccc; background: #fff; color: #333; text-align: center;">cek nilai 
 
                 </a>
             </div>

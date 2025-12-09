@@ -14,11 +14,7 @@
 </head>
 <body>
 
-<?php
-$page_title = "Dashboard";
-$show_add_course = true;
-include "header.php";
-?>
+<?php include "views/layouts/header.php"; ?>
 
 
 <div class="section">
@@ -30,8 +26,8 @@ include "header.php";
 
         if (mysqli_num_rows($myClasses) == 0): ?>
             <div class="empty-state">
-                <h3>Belum ada kelas yang diikuti.</h3>
-                <p>Klik tombol "New Class" di header untuk mulai belajar!</p>
+                <h3>No classes enrolled yet.</h3>
+                <p>Click the "New Class" button in the header to start learning!</p>
             </div>
         <?php else: ?>
 
@@ -98,6 +94,22 @@ include "header.php";
             endwhile; ?>
         <?php endif;
         ?>
+
+        <!-- Add New Course Card -->
+        <a href="index.php?page=catalog" class="info add-course-card">
+            <div class="add-course-content">
+                <div class="add-course-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </div>
+                <div class="add-course-text">
+                    <div class="subject-name">Add New Course</div>
+                    <div class="subject-description">Explore catalog and join a new class</div>
+                </div>
+            </div>
+        </a>
 
     </div>
 </div>
