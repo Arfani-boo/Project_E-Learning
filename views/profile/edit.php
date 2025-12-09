@@ -8,13 +8,19 @@ if (isset($_GET['edit_teacher'])) {
     $hidden_id = $user['id'];
     $back_page = $_GET['back'] ?? 'manage_teachers';
 
+} elseif (isset($_GET['edit_student'])) {
+    $title = "Edit Data student";
+    $form_name = 'update_student';
+    $hidden_id = intval($_GET['edit_student']);
+    $back_page = $_GET['back'] ?? 'manage_students';
+
 } elseif (isset($_GET['edit_school'])) {
     $title = "Edit Data Sekolah";
     $form_name = 'update_school';
     $hidden_id = $school['id'];
     $back_page = $_GET['back'] ?? 'manage_schools';
     
-} else {
+}  else {
 
     $title = "Edit Profil Saya";
     $form_name = 'update_profile';
@@ -35,6 +41,7 @@ if (isset($_GET['edit_teacher'])) {
         <input type="hidden" name="<?= $form_name ?>" value="1">
         <input type="hidden" name="id" value="<?= $hidden_id ?>">
         <input type="hidden" name="back" value="<?= $back_page ?>">
+
         <?php if ($form_name === 'update_teacher'): // Mode Guru ?>
             <div class="form-group">
                 <label>Nama Lengkap</label>
@@ -60,6 +67,31 @@ if (isset($_GET['edit_teacher'])) {
                 <input type="password" name="password" class="form-control" placeholder="Kosongkan bila tidak berubah">
             </div>
 
+        <?php elseif ($form_name === 'update_student'):?>
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" name="full_name" class="form-control" value="<?= htmlspecialchars($student['full_name']) ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($student['email']) ?>" required>
+            </div>
+            <div class="form-group">
+                <label>Asal Sekolah</label>
+                <select name="school_id" class="form-control" required>
+                    <option value="">-- Pilih Sekolah --</option>
+                    <?php foreach ($daftar_sekolah as $s): ?>
+                        <option value="<?= $s['id'] ?>" <?= ($s['id'] == $student['school_id']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($s['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Password Baru <small>(kosongkan jika tidak diganti)</small></label>
+                <input type="password" name="password" class="form-control" placeholder="Kosongkan bila tidak berubah">
+            </div>
+
         <?php elseif ($form_name === 'update_school'): ?>
             <div class="form-group">
                 <label>Nama Sekolah</label>
@@ -72,15 +104,22 @@ if (isset($_GET['edit_teacher'])) {
 
         <?php else: // Mode edit profil sendiri ?>
             <input type="hidden" name="from" value="<?= $kembali_ke ?? 'dashboard' ?>">
-            
+
+            <?php if($_SESSION['role'] == 'admin'):?>
             <div class="form-group">
                 <label>Nama Lengkap</label>
-                <input type="text" class="form-control" value="<?= $user['full_name'] ?>" readonly style="background: #eee;">
+                <input type="text" name="full_name" class="form-control" value="<?= $user['full_name'] ?>" style="background: #eee;">
+            </div>
+            <?php else:?>
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" name="full_name" class="form-control" value="<?= $user['full_name'] ?>" readonly style="background: #eee;">
                 <small>Hubungi admin jika ingin mengubah nama.</small>
             </div>
+            <?php endif;?>
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>" id="email" required>
+                <input type="text" name="email" class="form-control" value="<?= $user['email'] ?>" id="email" required>
                 <small id="emailError" class="err"></small>
             </div>
             <?php if ($_SESSION['role'] != 'admin'): ?>

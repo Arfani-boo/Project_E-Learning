@@ -61,6 +61,16 @@ switch ($page) {
         manageSchools($koneksi);
         break;
 
+    case 'manage_students':
+        require_once 'controllers/AdminController.php';
+        manageStudents($koneksi);
+        break;
+
+    case 'manage_admin':
+        require_once 'controllers/AdminController.php';
+        manageAdmin($koneksi);
+        break;
+
     // --- FITUR GURU ---
     case 'manage_course':
         require_once 'controllers/TeacherController.php';

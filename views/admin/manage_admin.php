@@ -1,29 +1,29 @@
 <?php include 'views/layouts/header.php'; ?>
 
 <div class="container">
-    <h2>👨‍🏫 Manajemen Guru</h2>
-    <p style="color: gray;">Daftarkan akun untuk tenaga pengajar di sini.</p>
+    <h2>👨‍💻 Manajemen Admin</h2>
+    <p style="color: gray;">Daftarkan akun Admin di sini.</p>
     <br>
 
     <div style="display: flex; gap: 30px; flex-wrap: wrap;">
         
         <div style="flex: 1; min-width: 300px;">
             <div class="card">
-                <h3>➕ Tambah Guru Baru</h3>
+                <h3>➕ Tambah Admin Baru</h3>
                 <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
 
-                <form action="index.php?page=manage_teachers" method="POST">
+                <form action="index.php?page=manage_admin" method="POST">
                     <input type="hidden" name="aksi" value="tambah">
 
                     <div class="form-group">
-                        <label>Nama Lengkap Guru<a style="color:red; font-size:large;">*</a></label>
-                        <input type="text" name="full_name" class="form-control" id="nama" placeholder="Misal: Mr. Budi">
+                        <label>Nama Lengkap<a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="full_name" class="form-control" id="nama" placeholder="Misal: Budi">
                         <small id="fullNameError" class="err"></small>
                     </div>
 
                     <div class="form-group">
                         <label>Email Login<a style="color:red; font-size:large;">*</a></label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="guru@sekolah.id">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="admin@admin123.id">
                         <small id="emailError" class="err"></small>
                     </div>
 
@@ -36,48 +36,32 @@
                             </span>
                         </div>
                         <small id="passwordError" class="err"></small>
-                        <small style="color: gray;">Guru bisa menggantinya nanti.</small>
+                        <small style="color: gray;">Admin baru bisa menggantinya nanti.</small>
                     </div>
 
-                    <div class="form-group">
-                        <label>Asal Sekolah<a style="color:red; font-size:large;">*</a></label>
-                        <select name="school_id" class="form-control" id="sekolah">
-                            <option value="" id="sekolah">-- Pilih Sekolah --</option>
-                            <?php 
-                            // Kita reset pointer data sekolah jika perlu, atau loop ulang
-                            // Pastikan $sekolah dikirim dari Controller
-                            foreach($sekolah as $s): 
-                            ?>
-                                <option value="<?= $s['id'] ?>" id="sekolah"><?= $s['name'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <small id="sekolahError" class="err"></small>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-block">Simpan Data Guru</button>
+                    <button type="submit" class="btn btn-primary btn-block">Simpan Data Admin</button>
                 </form>
             </div>
         </div>
 
         <div style="flex: 2; min-width: 400px;">
             <div class="card">
-                <h3>📋 Daftar Guru Terdaftar</h3>
+                <h3>📋 Daftar Siswa Terdaftar</h3>
                 
-                <?php if(mysqli_num_rows($guru_list) == 0): ?>
+                <?php if(mysqli_num_rows($admin_list) == 0): ?>
                     <p style="text-align: center; margin-top: 20px;">Belum ada data guru.</p>
                 <?php else: ?>
                     <table>
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Guru</th>
+                                <th>Nama Admin</th>
                                 <th>Email</th>
-                                <th>Asal Sekolah</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1; while($row = mysqli_fetch_assoc($guru_list)): ?>
+                            <?php $no = 1; while($row = mysqli_fetch_assoc($admin_list)): ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td>
@@ -85,17 +69,7 @@
                                 </td>
                                 <td><?= $row['email'] ?></td>
                                 <td>
-                                    <?php if($row['school_name']): ?>
-                                        <span class="badge bg-blue"><?= $row['school_name'] ?></span>
-                                    <?php else: ?>
-                                        <span class="badge bg-orange">Umum</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <a href="index.php?page=profile&edit_teacher=<?= $row['id'] ?>&back=manage_teachers" class="btn btn-edit">✏️Edit</a>
-                                    <a href="index.php?page=manage_teachers&hapus_id=<?= $row['id'] ?>" 
-   onclick="return confirm('Yakin hapus guru ini? Semua kursus & nilai akan hilang.')" class="btn btn-delete" >🗑️ Hapus</a>
-                                </td>
+                                    <a href="index.php?page=manage_admin&hapus_id=<?= $row['id'] ?>" onclick="return confirm('Yakin?')" class="btn btn-delete">🗑️ Hapus</a>
                             </tr>
                             <?php endwhile; ?>
                         </tbody>
@@ -114,12 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const email   = document.getElementById('email').value.trim();
         const password   = document.getElementById('passInputGuru').value.trim();
         const nama   = document.getElementById('nama').value.trim();
-        const sekul   = document.getElementById('sekolah').value;
         let ok = true;
         if (!validateEmail(email)) {ok = false};
         if (!validatePassword(password)) {ok = false};
         if (!validateFullName(nama)) {ok = false};
-        if (!validateSekolah(sekul)) {ok = false};
         if (!ok){e.preventDefault()};
     });
 });

@@ -30,6 +30,20 @@ function daftarUserBaru($koneksi, $data) {
     return mysqli_query($koneksi, $query);
 }
 
+function ambilSemuaSiswa($koneksi) {
+    $query = "SELECT users.*, schools.name as school_name 
+              FROM users 
+              LEFT JOIN schools ON users.school_id = schools.id 
+              WHERE role = 'student'";
+    return mysqli_query($koneksi, $query);
+}
+
+function ambilSemuaAdmin($koneksi) {
+    $query = "SELECT users.* FROM users 
+              WHERE role = 'admin'";
+    return mysqli_query($koneksi, $query);
+}
+
 function ambilSemuaGuru($koneksi) {
     // Join dengan tabel schools biar tahu guru dari sekolah mana
     $query = "SELECT users.*, schools.name as school_name 
@@ -58,6 +72,20 @@ function hitungJumlahSiswa($koneksi) {
     return $data['total'];
 }
 
+function hitungJumlahAdmin($koneksi) {
+    $query = "SELECT COUNT(*) as total FROM users WHERE role = 'admin'";
+    $result = mysqli_query($koneksi, $query);
+    $data = mysqli_fetch_assoc($result);
+    return $data['total'];
+}
+
+function hitungJumlahSekolah($koneksi) {
+    $query = "SELECT COUNT(*) as total FROM schools";
+    $result = mysqli_query($koneksi, $query);
+    $data = mysqli_fetch_assoc($result);
+    return $data['total'];
+}
+
 function ambilUserById($koneksi, $id) {
     $query = "SELECT * FROM users WHERE id = $id";
     $result = mysqli_query($koneksi, $query);
@@ -76,6 +104,11 @@ function updateDataUser($koneksi, $id, $data) {
     // (Logika ini dijaga di Controller, tapi di query kita pastikan aman)
     if (isset($data['school_id'])) {
         $query .= ", school_id = $school_id";
+    }
+
+    if (isset($data['full_name'])) {
+        $nama = mysqli_real_escape_string($koneksi, $data['full_name']);
+        $query .= ", full_name = '$nama'";
     }
     
     // Jika password diisi (tidak kosong), maka update password

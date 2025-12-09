@@ -11,6 +11,8 @@ function dashboardAdmin($koneksi) {
     // Ambil statistik ringkas
     $totalGuru = hitungJumlahGuru($koneksi);
     $totalSiswa = hitungJumlahSiswa($koneksi);
+    $totalSekolah = hitungJumlahSekolah($koneksi);
+    $totalAdmin = hitungJumlahAdmin($koneksi);
     
     require 'views/admin/dashboard.php';
 }
@@ -93,6 +95,61 @@ function manageSchools($koneksi) {
     $sekolah_list = ambilSemuaSekolah($koneksi);
     
     require 'views/admin/manage_schools.php';
+}
+
+function manageStudents($koneksi) {
+    if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
+    $sekolah = ambilSemuaSekolah($koneksi);
+    $student_list = ambilSemuaSiswa($koneksi); // SELECT
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['aksi'] == 'tambah') {
+        $data = [
+            'full_name' => $_POST['full_name'],
+            'email'     => $_POST['email'],
+            'password'  => $_POST['password'], // Admin yang set password awal
+            'school_id' => $_POST['school_id'],
+            'role'      => 'student'
+        ];
+        
+        daftarUserBaru($koneksi, $data);
+        header("Location: index.php?page=manage_students");
+        exit;
+    }
+
+    if (isset($_GET['hapus_id'])) {
+        $id = intval($_GET['hapus_id']);
+        mysqli_query($koneksi, "DELETE FROM users WHERE id=$id");
+        header("Location: index.php?page=manage_students");
+        exit;
+    }
+    require 'views/admin/manage_students.php';
+}
+
+function manageAdmin($koneksi) {
+    if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
+
+    $admin_list = ambilSemuaAdmin($koneksi); // SELECT
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['aksi'] == 'tambah') {
+        $data = [
+            'full_name' => $_POST['full_name'],
+            'email'     => $_POST['email'],
+            'password'  => $_POST['password'], // Admin yang set password awal
+            'role'      => 'admin'
+        ];
+        
+        daftarUserBaru($koneksi, $data);
+        header("Location: index.php?page=manage_admin");
+        exit;
+    }
+
+    if (isset($_GET['hapus_id'])) {
+        $id = intval($_GET['hapus_id']);
+        mysqli_query($koneksi, "DELETE FROM users WHERE id=$id");
+        header("Location: index.php?page=manage_admin");
+        exit;
+    }
+    require 'views/admin/manage_admin.php';
 }
 
 ?>

@@ -158,6 +158,10 @@ button {
     border-left-color: #9b59b6;
 }
 
+.info.red{
+    border-left-color: #8c0132;
+}
+
 .info-l {
     display: flex;
     align-items: center;

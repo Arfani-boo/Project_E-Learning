@@ -43,6 +43,22 @@ function editProfile($koneksi) {
         }
     }
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_student'])) {
+        $id   = intval($_POST['id']);
+        $nama = $_POST['full_name'] ?? '';
+        $email= $_POST['email']      ?? '';
+        $sekolah = intval($_POST['school_id'] ?? 0);
+        $pass  = $_POST['password']  ?? '';
+        if (!empty($_POST['password'])) {
+            $data['password'] = $_POST['password'];
+        }
+        updateGuruManual($koneksi, $id, $nama, $email, $sekolah, $pass);
+        
+        $back = $_POST['back'] ?? 'manage_schools';
+        echo "<script>alert('Data siswa berhasil diperbarui!'); window.location='index.php?page=manage_students';</script>";
+        exit;
+    }
+
     if (isset($_GET['edit_teacher'])) {
         $id     = intval($_GET['edit_teacher']);
         $user   = ambilUserById($koneksi, $id);
@@ -60,6 +76,15 @@ function editProfile($koneksi) {
         exit;
     }
     
+    if (isset($_GET['edit_student'])) {
+        $id = intval($_GET['edit_student']);
+        $user   = ambilUserById($koneksi, $id);
+        $student = ambilUserById($koneksi, $id);
+        $daftar_sekolah = ambilSemuaSekolah($koneksi);
+        require 'views/profile/edit.php';
+        exit;
+    }
+
     if (!isset($_SESSION['user_id'])) { header("Location: index.php?page=login"); exit; }
 
     $id_user = $_SESSION['user_id'];
@@ -77,6 +102,11 @@ function editProfile($koneksi) {
 
         if ($role_user != 'admin') {
             $data['school_id'] = $_POST['school_id'];
+        }
+
+        if ($role_user === 'admin') {
+            $_SESSION['full_name']=$_POST['full_name'];
+            $data['full_name'] = $_POST['full_name'];
         }
 
         if (updateDataUser($koneksi, $id_user, $data)) {

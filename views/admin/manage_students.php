@@ -1,7 +1,7 @@
 <?php include 'views/layouts/header.php'; ?>
 
 <div class="container">
-    <h2>👨‍🏫 Manajemen Guru</h2>
+    <h2>👨‍🎓 Manajemen Murid</h2>
     <p style="color: gray;">Daftarkan akun untuk tenaga pengajar di sini.</p>
     <br>
 
@@ -9,21 +9,21 @@
         
         <div style="flex: 1; min-width: 300px;">
             <div class="card">
-                <h3>➕ Tambah Guru Baru</h3>
+                <h3>➕ Tambah Siswa Baru</h3>
                 <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
 
-                <form action="index.php?page=manage_teachers" method="POST">
+                <form action="index.php?page=manage_students" method="POST">
                     <input type="hidden" name="aksi" value="tambah">
 
                     <div class="form-group">
-                        <label>Nama Lengkap Guru<a style="color:red; font-size:large;">*</a></label>
-                        <input type="text" name="full_name" class="form-control" id="nama" placeholder="Misal: Mr. Budi">
+                        <label>Nama Lengkap Siswa<a style="color:red; font-size:large;">*</a></label>
+                        <input type="text" name="full_name" class="form-control" id="nama" placeholder="Misal: Budi">
                         <small id="fullNameError" class="err"></small>
                     </div>
 
                     <div class="form-group">
                         <label>Email Login<a style="color:red; font-size:large;">*</a></label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="guru@sekolah.id">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="siswa@student.id">
                         <small id="emailError" class="err"></small>
                     </div>
 
@@ -36,7 +36,7 @@
                             </span>
                         </div>
                         <small id="passwordError" class="err"></small>
-                        <small style="color: gray;">Guru bisa menggantinya nanti.</small>
+                        <small style="color: gray;">Siswa bisa menggantinya nanti.</small>
                     </div>
 
                     <div class="form-group">
@@ -44,8 +44,6 @@
                         <select name="school_id" class="form-control" id="sekolah">
                             <option value="" id="sekolah">-- Pilih Sekolah --</option>
                             <?php 
-                            // Kita reset pointer data sekolah jika perlu, atau loop ulang
-                            // Pastikan $sekolah dikirim dari Controller
                             foreach($sekolah as $s): 
                             ?>
                                 <option value="<?= $s['id'] ?>" id="sekolah"><?= $s['name'] ?></option>
@@ -54,30 +52,30 @@
                         <small id="sekolahError" class="err"></small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Simpan Data Guru</button>
+                    <button type="submit" class="btn btn-primary btn-block">Simpan Data Siswa</button>
                 </form>
             </div>
         </div>
 
         <div style="flex: 2; min-width: 400px;">
             <div class="card">
-                <h3>📋 Daftar Guru Terdaftar</h3>
+                <h3>📋 Daftar Siswa Terdaftar</h3>
                 
-                <?php if(mysqli_num_rows($guru_list) == 0): ?>
+                <?php if(mysqli_num_rows($student_list) == 0): ?>
                     <p style="text-align: center; margin-top: 20px;">Belum ada data guru.</p>
                 <?php else: ?>
                     <table>
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Guru</th>
+                                <th>Nama Siswa</th>
                                 <th>Email</th>
                                 <th>Asal Sekolah</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1; while($row = mysqli_fetch_assoc($guru_list)): ?>
+                            <?php $no = 1; while($row = mysqli_fetch_assoc($student_list)): ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td>
@@ -92,10 +90,8 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="index.php?page=profile&edit_teacher=<?= $row['id'] ?>&back=manage_teachers" class="btn btn-edit">✏️Edit</a>
-                                    <a href="index.php?page=manage_teachers&hapus_id=<?= $row['id'] ?>" 
-   onclick="return confirm('Yakin hapus guru ini? Semua kursus & nilai akan hilang.')" class="btn btn-delete" >🗑️ Hapus</a>
-                                </td>
+                                    <a href="index.php?page=profile&edit_student=<?= $row['id'] ?>&back=manage_students" class="btn btn-edit">✏️Edit</a>
+                                    <a href="index.php?page=manage_students&hapus_id=<?= $row['id'] ?>" onclick="return confirm('Yakin?')" class="btn btn-delete">🗑️ Hapus</a>
                             </tr>
                             <?php endwhile; ?>
                         </tbody>

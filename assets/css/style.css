@@ -456,4 +456,54 @@ div[style*="display: grid"] {
     .header-buttons .btn {
         width: 100%;
     }
+
+    .btn-edit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #fff;
+        background-color: #2196f3;
+        border: 1px solid #0b7dda;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .btn-edit:hover {
+        background-color: #0b7dda;
+        border-color: #0a6bb8;
+    }
+    .btn-edit:active {
+        transform: translateY(1px);
+    }
+
+    .btn-delete {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #fff;
+        background-color: #f44336;
+        border: 1px solid #da190b;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .btn-delete:hover {
+        background-color: #da190b;
+        border-color: #c21807;
+    }
+    .btn-delete:active {
+        transform: translateY(1px);
+}
 }

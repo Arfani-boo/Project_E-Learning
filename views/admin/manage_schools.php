@@ -49,10 +49,10 @@
                             <td><b><?= $row['name'] ?></b></td>
                             <td><?= $row['address'] ? $row['address'] : '-' ?></td>
                             <td>
-                                <a href="index.php?page=profile&edit_school=<?= $row['id'] ?>&back=manage_schools" class="btn btn-sm btn-warning">Edit</a>
+                                <a href="index.php?page=profile&edit_school=<?= $row['id'] ?>&back=manage_schools" class="btn btn-edit">✏️ Edit</a>
                                 <a href="index.php?page=manage_schools&hapus_id=<?= $row['id'] ?>" 
                                    onclick="return confirm('Yakin hapus? User yang terhubung akan kehilangan data sekolahnya.')"
-                                   style="color: red;">Hapus</a>
+                                   class="btn btn-delete">🗑️ Hapus</a>
                             </td>
                         </tr>
                         <?php endwhile; ?>
