@@ -8,8 +8,7 @@ function showError(elementId, message) {
     errorElement.textContent = message;
 }
 
-//Fungsi Validasi ni wok
-// hitam lho ya
+//Fungsi Validasi
 
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

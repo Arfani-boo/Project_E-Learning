@@ -1,9 +1,7 @@
 <?php
-// views/teacher/student_progress.php
-$page_css = 'assets/css/teacher/student_progress.css'; // opsional
+$page_css = 'assets/css/teacher/student_progress.css';
 include 'views/layouts/header.php';
 
-// Data dikirim dari controller progressSiswa()
 $course = $course ?? [];
 $student = $student ?? [];
 $chapters = $chapters ?? [];
@@ -25,8 +23,6 @@ $nilai_list = $nilai_list ?? [];
     </div>
 
     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-
-        <!-- Progress Materi -->
         <div style="flex: 2; min-width: 400px;">
             <div class="card">
                 <h3>📚 Progress Materi per Bab</h3>
@@ -62,7 +58,6 @@ $nilai_list = $nilai_list ?? [];
             </div>
         </div>
 
-        <!-- Nilai Kuis -->
         <div style="flex: 1; min-width: 300px;">
             <div class="card">
                 <h3>📝 Nilai Kuis per Bab</h3>

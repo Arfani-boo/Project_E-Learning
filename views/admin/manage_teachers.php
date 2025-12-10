@@ -51,8 +51,6 @@
                         <select name="school_id" class="form-control" id="sekolah">
                             <option value="" id="sekolah">-- Pilih Sekolah --</option>
                             <?php 
-                            // Kita reset pointer data sekolah jika perlu, atau loop ulang
-                            // Pastikan $sekolah dikirim dari Controller
                             foreach($sekolah as $s): 
                             ?>
                                 <option value="<?= $s['id'] ?>" id="sekolah"><?= $s['name'] ?></option>

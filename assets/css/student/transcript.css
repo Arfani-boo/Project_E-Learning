@@ -1,6 +1,3 @@
-/* ===========================================
-   CARD UTAMA
-=========================================== */
 .container .card {
     background: #ffffff;
     padding: 25px 28px;
@@ -10,7 +7,6 @@
     margin-top: 20px;
 }
 
-/* Header card */
 .container .card h2 {
     font-size: 1.75rem;
     font-weight: 700;
@@ -23,7 +19,6 @@
     color: #7a7a7a;
 }
 
-/* Tombol Kembali */
 .container .card .btn {
     background: #eef1f4;
     padding: 8px 16px;
@@ -38,16 +33,12 @@
     background: #e2e5e9;
 }
 
-/* Garis pembatas */
 .container .card hr {
     margin: 18px 0;
     border: 0;
     border-top: 1px solid #eee;
 }
 
-/* ===========================================
-   TABEL
-=========================================== */
 .container .table {
     width: 100%;
     border-collapse: collapse;
@@ -56,7 +47,6 @@
     color: #2c3e50;
 }
 
-/* Header tabel */
 .container .table thead tr {
     background: #f6f7f9;
     border-bottom: 2px solid #dcdcdc;
@@ -69,25 +59,19 @@
     font-size: 0.95rem;
 }
 
-/* Body tabel */
 .container .table td {
     padding: 12px 14px;
     border-bottom: 1px solid #eee;
 }
 
-/* Hover row */
 .container .table tbody tr:hover {
     background: #f9fafc;
 }
 
-/* Kolom nilai lebih menonjol */
 .container .table td b {
     color: #2c3e50;
 }
 
-/* ===========================================
-   BADGE STATUS
-=========================================== */
 .container .badge {
     font-size: 0.85rem;
     padding: 6px 10px;
@@ -96,27 +80,21 @@
     font-weight: 600;
 }
 
-/* Lulus */
 .container .bg-green {
     background: #2ecc71;
     color: #fff !important;
 }
 
-/* Remidi */
 .container .bg-red {
     background: #e74c3c;
     color: #fff !important;
 }
 
-/* Menunggu koreksi */
 .container .bg-wait {
     background: #f1c40f;
     color: #333 !important;
 }
 
-/* ===========================================
-   RESPONSIVE
-=========================================== */
 @media (max-width: 768px) {
     .container .card {
         padding: 20px;

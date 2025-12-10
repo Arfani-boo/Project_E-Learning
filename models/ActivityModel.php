@@ -1,5 +1,4 @@
 <?php
-// models/ActivityModel.php
 
 function ambilKelasSaya($koneksi, $student_id) {
     $query = "SELECT courses.*, enrollments.enrolled_at 
@@ -15,7 +14,6 @@ function gabungKelas($koneksi, $user_id, $course_id) {
 }
 
 function tandaiMateriSelesai($koneksi, $user_id, $material_id) {
-    // Cek dulu biar ga duplikat
     $cek = mysqli_query($koneksi, "SELECT * FROM material_completions WHERE user_id=$user_id AND material_id=$material_id");
     if (mysqli_num_rows($cek) == 0) {
         $query = "INSERT INTO material_completions (user_id, material_id) VALUES ($user_id, $material_id)";
@@ -23,30 +21,23 @@ function tandaiMateriSelesai($koneksi, $user_id, $material_id) {
     }
 }
 
-// models/ActivityModel.php
-
 function hitungPersentaseProgress($koneksi, $user_id, $course_id) {
-    // [SAFETY] Cegah error jika course_id kosong
     if (empty($course_id) || $course_id == 0) {
         return 0;
     }
 
-    // 1. Hitung Total Materi
     $query_total = "SELECT COUNT(*) as total 
                     FROM materials m 
                     JOIN chapters c ON m.chapter_id = c.id 
                     WHERE c.course_id = $course_id";
     $res_total = mysqli_query($koneksi, $query_total);
-    
-    // [SAFETY] Cek query
+
     if (!$res_total) return 0;
     
     $total_materi = mysqli_fetch_assoc($res_total)['total'];
 
-    // [SAFETY] Cegah Pembagian dengan Nol (Division by Zero)
     if ($total_materi == 0) return 0;
 
-    // 2. Hitung Materi Selesai
     $query_selesai = "SELECT COUNT(*) as selesai 
                       FROM material_completions mc
                       JOIN materials m ON mc.material_id = m.id
@@ -56,19 +47,15 @@ function hitungPersentaseProgress($koneksi, $user_id, $course_id) {
     $res_selesai = mysqli_query($koneksi, $query_selesai);
     $sudah_selesai = mysqli_fetch_assoc($res_selesai)['selesai'];
 
-    // 3. Hitung Persentase
     return round(($sudah_selesai / $total_materi) * 100);
 }
 
-// Cek apakah materi tertentu sudah selesai (untuk tombol classroom)
 function cekMateriSelesai($koneksi, $user_id, $material_id) {
     $q = "SELECT * FROM material_completions WHERE user_id = $user_id AND material_id = $material_id";
     $r = mysqli_query($koneksi, $q);
     return (mysqli_num_rows($r) > 0);
 }
 function keluarDariKelas($koneksi, $user_id, $course_id) {
-    // TAHAP 1: Hapus Progress Materi (Centang Hijau)
-    // Query ini menghapus data di material_completions yang berhubungan dengan course ini
     $query_materi = "DELETE mc FROM material_completions mc
                      INNER JOIN materials m ON mc.material_id = m.id
                      INNER JOIN chapters c ON m.chapter_id = c.id
@@ -76,9 +63,6 @@ function keluarDariKelas($koneksi, $user_id, $course_id) {
                      AND mc.user_id = $user_id";
     mysqli_query($koneksi, $query_materi);
 
-    // TAHAP 2: Hapus Nilai Kuis (Riwayat Ujian)
-    // Query ini menghapus data di quiz_attempts yang berhubungan dengan course ini
-    // (Data di quiz_answers akan ikut terhapus otomatis karena fitur Cascade di database)
     $query_quiz = "DELETE qa FROM quiz_attempts qa
                    INNER JOIN quizzes q ON qa.quiz_id = q.id
                    INNER JOIN chapters c ON q.chapter_id = c.id
@@ -86,7 +70,6 @@ function keluarDariKelas($koneksi, $user_id, $course_id) {
                    AND qa.user_id = $user_id";
     mysqli_query($koneksi, $query_quiz);
 
-    // TAHAP 3: Baru Hapus Pendaftarannya (Enrollment)
     $query_enroll = "DELETE FROM enrollments 
                      WHERE user_id = $user_id 
                      AND course_id = $course_id";
@@ -95,11 +78,9 @@ function keluarDariKelas($koneksi, $user_id, $course_id) {
 }
 
 function ambilStatistikSiswa($koneksi, $user_id) {
-    // 1. Hitung Total Kelas yang Diikuti
     $q1 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM enrollments WHERE user_id = $user_id");
     $total_kelas = mysqli_fetch_assoc($q1)['total'];
 
-    // 2. Hitung Total Materi yang Sudah Selesai
     $q2 = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM material_completions WHERE user_id = $user_id");
     $total_materi = mysqli_fetch_assoc($q2)['total'];
 

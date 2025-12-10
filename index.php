@@ -1,19 +1,13 @@
 <?php
-// index.php
 
-// 1. Mulai sesi
 session_start();
 
-// 2. Hubungkan database
 require_once 'koneksi.php';
 
-// 3. Ambil parameter URL
 $page = isset($_GET['page']) ? $_GET['page'] : 'login';
 
-// 4. LOGIKA ROUTING
 switch ($page) {
-    
-    // --- AUTHENTICATION ---
+
     case 'login':
         require_once 'controllers/AuthController.php';
         login($koneksi);
@@ -29,7 +23,7 @@ switch ($page) {
         logout();
         break;
 
-    // --- DASHBOARD UTAMA ---
+    // dashboard
 
 
     case 'dashboard':
@@ -50,7 +44,7 @@ switch ($page) {
         }
         break;
 
-    // --- FITUR ADMIN ---
+    // admin
     case 'manage_teachers':
         require_once 'controllers/AdminController.php';
         manageTeachers($koneksi);
@@ -71,7 +65,7 @@ switch ($page) {
         manageAdmin($koneksi);
         break;
 
-    // --- FITUR GURU ---
+    // guru
     case 'manage_course':
         require_once 'controllers/TeacherController.php';
         manageCourse($koneksi);
@@ -118,7 +112,7 @@ switch ($page) {
         progressSiswa($koneksi);
         break;
 
-    // --- FITUR SISWA ---
+    // siswa
     case 'catalog':
         require_once 'controllers/StudentController.php';
         catalog($koneksi);
@@ -134,25 +128,22 @@ switch ($page) {
         takeQuiz($koneksi);
         break;
     
-    case 'quiz_result': // Tambahan untuk halaman hasil kuis
+    case 'quiz_result': 
         require 'views/student/quiz_result.php';
         break;
 
-    // --- LOGIC DETAIL KELAS (PENTING: Gabungan Guru & Siswa) ---
+    // kelas
     case 'course_detail':
-        // Cek Role User untuk menentukan tampilan
         if ($_SESSION['role'] == 'teacher') {
-            // Jika GURU: Masuk ke Mode Edit/Manage (Course Manage)
             require_once 'controllers/TeacherController.php';
             courseDetailTeacher($koneksi);
         } else {
-            // Jika SISWA: Masuk ke Mode Belajar (Silabus)
             require_once 'controllers/StudentController.php';
             courseDetailStudent($koneksi);
         }
         break;
 
-    // --- FITUR UMUM ---
+    // umum
     case 'profile':
         require_once 'controllers/ProfileController.php';
         editProfile($koneksi);
@@ -163,7 +154,7 @@ switch ($page) {
         studentTranscript($koneksi);
         break;
 
-    // --- DEFAULT (404) ---
+    // err
     default:
         echo "<div style='text-align:center; margin-top:50px;'>";
         echo "<h3>404 - Halaman tidak ditemukan!</h3>";

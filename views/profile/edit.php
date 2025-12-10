@@ -42,7 +42,7 @@ if (isset($_GET['edit_teacher'])) {
         <input type="hidden" name="id" value="<?= $hidden_id ?>">
         <input type="hidden" name="back" value="<?= $back_page ?>">
 
-        <?php if ($form_name === 'update_teacher'): // Mode Guru ?>
+        <?php if ($form_name === 'update_teacher'): ?>
             <div class="form-group">
                 <label>Nama Lengkap</label>
                 <input type="text" name="full_name" class="form-control" value="<?= htmlspecialchars($user['full_name']) ?>" required>
@@ -102,7 +102,7 @@ if (isset($_GET['edit_teacher'])) {
                 <textarea name="address" class="form-control" rows="3"><?= htmlspecialchars($school['address'] ?? '') ?></textarea>
             </div>
 
-        <?php else: // Mode edit profil sendiri ?>
+        <?php else:?>
             <input type="hidden" name="from" value="<?= $kembali_ke ?? 'dashboard' ?>">
 
             <?php if($_SESSION['role'] == 'admin'):?>

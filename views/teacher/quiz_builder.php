@@ -28,7 +28,6 @@
             $total_skor_saat_ini = 0; 
             
             foreach($questions as $q): 
-                // [PERBAIKAN] Gunakan 'weight' agar sesuai database
                 $total_skor_saat_ini += $q['weight'];
             ?>
                 <div class="card" style="position: relative; padding: 20px; margin-bottom: 15px;">
@@ -58,9 +57,7 @@
                             <?php 
                                 $media = $q['media_file'];
                                 
-                                // 1. Cek apakah ini Link YouTube
                                 if (strpos($media, 'youtube.com') !== false || strpos($media, 'youtu.be') !== false):
-                                    // Ambil ID Video
                                     $video_id = "";
                                     if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $media, $match)) {
                                         $video_id = $match[1];
@@ -71,15 +68,12 @@
                                 </div>
 
                             <?php 
-                                // 2. Jika bukan YouTube, Cek apakah Gambar (berakhiran jpg/png/dll)
                                 elseif (preg_match('/\.(jpg|jpeg|png|gif)$/i', $media)): 
-                                    // Cek apakah link luar (http) atau file lokal
                                     $img_src = (strpos($media, 'http') === 0) ? $media : "uploads/" . $media;
                             ?>
                                 <img src="<?= $img_src ?>" style="max-width: 100%; max-height: 250px; border-radius: 5px;">
 
                             <?php 
-                                // 3. Jika Audio File (MP3)
                                 elseif (preg_match('/\.(mp3|wav|ogg)$/i', $media)): 
                                     $audio_src = (strpos($media, 'http') === 0) ? $media : "uploads/" . $media;
                             ?>

@@ -5,10 +5,8 @@ require_once "models/QuizModel.php";
 $quiz_id = isset($_GET["quiz_id"]) ? intval($_GET["quiz_id"]) : 0;
 $student_id = $_SESSION["user_id"];
 
-// 1. Cari ID Kursus (Untuk tombol kembali)
 $course_id = ambilCourseIdDariQuiz($koneksi, $quiz_id);
 
-// 2. Ambil Nilai Sementara (MC Only)
 $q_nilai = mysqli_query(
     $koneksi,
     "SELECT * FROM quiz_attempts WHERE quiz_id = $quiz_id AND user_id = $student_id ORDER BY id DESC LIMIT 1",
@@ -16,19 +14,15 @@ $q_nilai = mysqli_query(
 $hasil = mysqli_fetch_assoc($q_nilai);
 $score = isset($hasil["score"]) ? $hasil["score"] : 0;
 
-// 3. [LOGIC BARU] Cek Tipe Soal
 $ada_essay = cekAdaSoalEssay($koneksi, $quiz_id);
 
-// Tentukan Tampilan Berdasarkan Ada/Tidak Essay
 if ($ada_essay) {
-    // CASE A: HAS ESSAY (Hide Score)
     $judul_hasil = "Answer Submitted! 📤";
-    $warna_hasil = "#3498db"; // Blue
+    $warna_hasil = "#3498db"; 
     $pesan_utama = "This quiz contains Essay questions.";
     $pesan_sub = "Your score will appear after being graded by Teacher.";
-    $tampil_score = false; // Hide score
+    $tampil_score = false; 
 } else {
-    // CASE B: MULTIPLE CHOICE ONLY (Show Score)
     $tampil_score = true;
     $warna_hasil = $score >= 70 ? "#2ecc71" : "#e74c3c";
     $judul_hasil = $score >= 70 ? "Excellent! 🎉" : "Don't Give Up! 💪";

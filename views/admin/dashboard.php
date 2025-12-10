@@ -1,5 +1,4 @@
 <?php
-// Use student dashboard styles for consistent look
 $page_css = 'assets/css/student/dashboard.css';
 include 'views/layouts/header.php';
 ?>

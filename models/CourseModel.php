@@ -1,16 +1,9 @@
 <?php
-// models/CourseModel.php
 
-// --- COURSE ---
-
-// [PERBAIKAN UTAMA] Fungsi ini sekarang pakai Query Canggih (Hitung Materi & Siswa)
-// Namanya kita samakan dengan Controller: 'ambilCourseMilikGuru'
 function ambilCourseMilikGuru($koneksi, $teacher_id) {
     $query = "SELECT c.*, 
-              -- Hitung jumlah siswa di tabel enrollments
               (SELECT COUNT(*) FROM enrollments e WHERE e.course_id = c.id) AS student_count,
-              
-              -- Hitung jumlah materi di tabel materials (lewat tabel chapters)
+
               (SELECT COUNT(*) FROM materials m 
                JOIN chapters ch ON m.chapter_id = ch.id 
                WHERE ch.course_id = c.id) AS total_materi
@@ -23,29 +16,22 @@ function ambilCourseMilikGuru($koneksi, $teacher_id) {
 }
 
 function ambilSemuaCoursePublik($koneksi) {
-    // Ambil info nama guru juga
     $query = "SELECT courses.*, users.full_name as teacher_name 
               FROM courses 
               JOIN users ON courses.teacher_id = users.id";
     return mysqli_query($koneksi, $query);
 }
 
-// [FUNGSI BUAT KELAS YANG SEMPAT HILANG]
 function buatKelasBaru($koneksi, $teacher_id, $title, $desc, $level) {
-    // Bersihkan input biar aman
     $title = mysqli_real_escape_string($koneksi, $title);
     $desc = mysqli_real_escape_string($koneksi, $desc);
     $level = mysqli_real_escape_string($koneksi, $level);
-    
-    // Query Insert
+
     $query = "INSERT INTO courses (teacher_id, title, description, level) 
               VALUES ($teacher_id, '$title', '$desc', '$level')";
               
     return mysqli_query($koneksi, $query);
 }
-
-// (Fungsi ini sepertinya duplikat dengan buatKelasBaru, kita pakai buatKelasBaru saja di Controller)
-// Tapi dibiarkan juga tidak apa-apa asal tidak dipanggil.
 
 function ambilCourseById($koneksi, $course_id) {
     $query = "SELECT * FROM courses WHERE id = $course_id";
@@ -53,7 +39,6 @@ function ambilCourseById($koneksi, $course_id) {
 }
 
 function ambilCourseByIdUser($koneksi, $course_id, $teacher_id) {
-    // Ambil data hanya jika milik guru tersebut (Validasi keamanan)
     $query = "SELECT * FROM courses WHERE id = $course_id AND teacher_id = $teacher_id";
     return mysqli_fetch_assoc(mysqli_query($koneksi, $query));
 }
@@ -66,13 +51,11 @@ function updateCourse($koneksi, $id, $title, $desc, $level) {
 }
 
 function hapusCourse($koneksi, $id) {
-    // Karena database sudah ON DELETE CASCADE, 
-    // cukup hapus row di tabel courses saja.
     $query = "DELETE FROM courses WHERE id = $id";
     return mysqli_query($koneksi, $query);
 }
 
-// --- CHAPTER ---
+// chapter
 
 function buatChapterBaru($koneksi, $course_id, $title, $urutan) {
     $title = mysqli_real_escape_string($koneksi, $title);
@@ -106,7 +89,7 @@ function ambilFullCourseStructure($koneksi, $course_id) {
     return $chapters;
 }
 
-// --- MATERIAL ---
+// materi
 
 function simpanMateri($koneksi, $data) {
     $chapter_id = intval($data['chapter_id']);

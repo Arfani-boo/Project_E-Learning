@@ -70,11 +70,9 @@ function toggleInputMateri() {
     var groupText = document.getElementById('groupText');
 
     if (tipe === 'text') {
-        // Jika Text, sembunyikan URL, tampilkan Textarea
         groupUrl.style.display = 'none';
         groupText.style.display = 'block';
     } else {
-        // Jika Video/Audio, tampilkan URL, sembunyikan Textarea
         groupUrl.style.display = 'block';
         groupText.style.display = 'none';
     }

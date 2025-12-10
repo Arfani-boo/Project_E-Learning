@@ -48,7 +48,6 @@ include "views/layouts/header.php";
                     </ul>
 
                     <?php
-                    // Cek apakah ada kuis di bab ini
                     $q_kuis = mysqli_query(
                         $koneksi,
                         "SELECT * FROM quizzes WHERE chapter_id = " .
@@ -60,10 +59,7 @@ include "views/layouts/header.php";
                             <small style="font-weight: bold; color: #555; display: block; margin-bottom: 5px;">EXERCISES & QUIZZES:</small>
 
                             <?php while ($k = mysqli_fetch_assoc($q_kuis)): ?>
-                                <?php // Cek Status: Apakah siswa sudah pernah mengerjakan?
-                                // Cek Status: Apakah siswa sudah pernah mengerjakan?
-                                // Cek Status: Apakah siswa sudah pernah mengerjakan?
-                                // Fungsi cekStatusKuis ada di QuizModel.php
+                                <?php
                                 $sudah_kerja = cekStatusKuis(
                                     $koneksi,
                                     $_SESSION["user_id"],
@@ -116,14 +112,12 @@ include "views/layouts/header.php";
                 <h4>📊 Statistik Belajar</h4>
 
                 <?php
-                // Panggil fungsi hitung progress
                 $persen = hitungPersentaseProgress(
                     $koneksi,
                     $_SESSION["user_id"],
                     $course["id"],
                 );
 
-                // Tentukan warna bar
                 $warna_bar = $persen < 50 ? "#f39c12" : "#2ecc71";
                 ?>
 

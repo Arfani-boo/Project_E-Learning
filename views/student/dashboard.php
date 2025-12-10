@@ -82,7 +82,6 @@ include "views/layouts/header.php";
         <?php endif;
         ?>
 
-        <!-- Add New Course Card -->
         <a href="index.php?page=catalog" class="info add-course-card">
             <div class="add-course-content">
                 <div class="add-course-icon">
@@ -102,7 +101,7 @@ include "views/layouts/header.php";
 </div>
 
 <script>
-// Profile dropdown
+
 function toggleProfileMenu() {
     var menu = document.getElementById("profileDropdown");
     menu.classList.toggle("show");
@@ -117,7 +116,6 @@ window.onclick = function(event) {
     }
 }
 
-// Delete overlay
 function showDeleteOverlay(element) {
     event.stopPropagation();
     var card = element.closest('.info');

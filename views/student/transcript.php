@@ -32,25 +32,7 @@ include "views/layouts/header.php";
                     <tr>
                         <td colspan="5" style="text-align: center; color: gray;">No grades recorded yet.</td>
                     </tr>
-                <?php
-
-                    // 1. DETEKSI NAMA KOLOM TANGGAL (Biar ga error undefined)
-                    // Fallback (Default)
-
-                    // 2. Cek Status
-                    // 1. DETEKSI NAMA KOLOM TANGGAL (Biar ga error undefined)
-                    // Fallback (Default)
-
-                    // 2. Cek Status
-                    // 1. DETEKSI NAMA KOLOM TANGGAL (Biar ga error undefined)
-                    // Fallback (Default)
-
-                    // 2. Cek Status
-                    // 1. DETEKSI NAMA KOLOM TANGGAL (Biar ga error undefined)
-                    // Fallback (Default)
-
-                    // 2. Cek Status
-                    else: ?>
+                <?php else: ?>
                     <?php
                     $no = 1;
                     while ($row = mysqli_fetch_assoc($nilaiList)):

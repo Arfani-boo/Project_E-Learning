@@ -1,14 +1,10 @@
 <?php
-// controllers/AdminController.php
 require_once 'models/UserModel.php';
 require_once 'models/SchoolModel.php';
 
-// --- DASHBOARD ADMIN ---
 function dashboardAdmin($koneksi) {
-    // Cek Keamanan: Hanya admin boleh masuk
     if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
     
-    // Ambil statistik ringkas
     $totalGuru = hitungJumlahGuru($koneksi);
     $totalSiswa = hitungJumlahSiswa($koneksi);
     $totalSekolah = hitungJumlahSekolah($koneksi);
@@ -17,21 +13,19 @@ function dashboardAdmin($koneksi) {
     require 'views/admin/dashboard.php';
 }
 
-// --- MANAJEMEN GURU (Create Teacher) ---
 function manageTeachers($koneksi) {
     if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
 
     $sekolah = ambilSemuaSekolah($koneksi);
-    $guru_list = ambilSemuaGuru($koneksi); // Untuk tabel daftar guru
+    $guru_list = ambilSemuaGuru($koneksi);
 
-    // Jika Admin menambah Guru baru
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['aksi'] == 'tambah') {
         $data = [
             'full_name' => $_POST['full_name'],
             'email'     => $_POST['email'],
-            'password'  => $_POST['password'], // Admin yang set password awal
+            'password'  => $_POST['password'],
             'school_id' => $_POST['school_id'],
-            'role'      => 'teacher' // Paksa role jadi teacher
+            'role'      => 'teacher'
         ];
         
         tambahGuruOlehAdmin($koneksi, $data);
@@ -70,7 +64,6 @@ function manageTeachers($koneksi) {
 function manageSchools($koneksi) {
     if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
 
-    // Logic Tambah Sekolah
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['aksi'] == 'tambah') {
         $nama_sekolah = mysqli_real_escape_string($koneksi, $_POST['name']);
         $alamat = mysqli_real_escape_string($koneksi, $_POST['address']); // Opsional
@@ -82,16 +75,13 @@ function manageSchools($koneksi) {
         exit;
     }
 
-    // Logic Hapus Sekolah
     if (isset($_GET['hapus_id'])) {
         $id = intval($_GET['hapus_id']);
-        // Hapus sekolah (Hati-hati constraint foreign key user!)
         mysqli_query($koneksi, "DELETE FROM schools WHERE id=$id");
         header("Location: index.php?page=manage_schools");
         exit;
     }
 
-    // Ambil data untuk tabel
     $sekolah_list = ambilSemuaSekolah($koneksi);
     
     require 'views/admin/manage_schools.php';
@@ -100,13 +90,13 @@ function manageSchools($koneksi) {
 function manageStudents($koneksi) {
     if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
     $sekolah = ambilSemuaSekolah($koneksi);
-    $student_list = ambilSemuaSiswa($koneksi); // SELECT
+    $student_list = ambilSemuaSiswa($koneksi);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['aksi'] == 'tambah') {
         $data = [
             'full_name' => $_POST['full_name'],
             'email'     => $_POST['email'],
-            'password'  => $_POST['password'], // Admin yang set password awal
+            'password'  => $_POST['password'],
             'school_id' => $_POST['school_id'],
             'role'      => 'student'
         ];
@@ -128,13 +118,13 @@ function manageStudents($koneksi) {
 function manageAdmin($koneksi) {
     if ($_SESSION['role'] != 'admin') { header("Location: index.php?page=login"); exit; }
 
-    $admin_list = ambilSemuaAdmin($koneksi); // SELECT
+    $admin_list = ambilSemuaAdmin($koneksi);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['aksi'] == 'tambah') {
         $data = [
             'full_name' => $_POST['full_name'],
             'email'     => $_POST['email'],
-            'password'  => $_POST['password'], // Admin yang set password awal
+            'password'  => $_POST['password'],
             'role'      => 'admin'
         ];
         

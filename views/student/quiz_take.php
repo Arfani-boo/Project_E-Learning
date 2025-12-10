@@ -40,7 +40,6 @@ include 'views/layouts/header.php';
                     <div style="margin-bottom: 20px; padding: 10px; background: #f9f9f9; border-radius: 8px; text-align: center;">
                         <?php 
                             $media = $s['media_file'];
-                            // Cek jika YouTube Link
                             if (strpos($media, 'youtube.com') !== false || strpos($media, 'youtu.be') !== false):
                                 $video_id = "";
                                 if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $media, $match)) {
@@ -52,14 +51,12 @@ include 'views/layouts/header.php';
                             </div>
 
                         <?php 
-                            // Cek jika Gambar (JPG/PNG/GIF)
                             elseif (preg_match('/\.(jpg|jpeg|png|gif)$/i', $media)): 
                                 $img_src = (strpos($media, 'http') === 0) ? $media : "uploads/" . $media;
                         ?>
                             <img src="<?= $img_src ?>" style="max-width: 100%; max-height: 400px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
 
                         <?php 
-                            // Cek jika Audio (MP3/WAV)
                             elseif (preg_match('/\.(mp3|wav|ogg)$/i', $media)): 
                                 $audio_src = (strpos($media, 'http') === 0) ? $media : "uploads/" . $media;
                         ?>
@@ -113,7 +110,6 @@ include 'views/layouts/header.php';
 </div>
 
 <script>
-// --- Script Progress Bar & Validasi Visual ---
 document.addEventListener("DOMContentLoaded", function() {
     const semuaInput = document.querySelectorAll('.input-jawaban');
     const totalSoal = parseInt(document.getElementById('totalSoal').innerText);
@@ -124,25 +120,19 @@ document.addEventListener("DOMContentLoaded", function() {
         let soalTerjawabUnik = new Set(); 
 
         semuaInput.forEach(input => {
-            // Logika: Radio Button dicek ATAU Textarea ada isinya
             if ((input.type === 'radio' && input.checked) || (input.type === 'textarea' && input.value.trim() !== '')) {
                 soalTerjawabUnik.add(input.getAttribute('data-soalid'));
-                // Ubah border kiri jadi HIJAU
                 document.getElementById('card-' + input.getAttribute('data-soalid')).style.borderLeft = "5px solid #2ecc71";
             } else if (input.type === 'textarea' && input.value.trim() === '') {
-                 // Balikin jadi ABU-ABU kalau dihapus
-                 // (Hanya jika belum ada radio yg terpilih, tapi ini kan textarea)
                  document.getElementById('card-' + input.getAttribute('data-soalid')).style.borderLeft = "4px solid #ddd";
             }
         });
 
-        // Update Text & Bar
         let jumlah = soalTerjawabUnik.size;
         textTerjawab.innerText = jumlah;
         let persen = (jumlah / totalSoal) * 100;
         progressBar.style.width = persen + "%";
         
-        // Ganti warna progress bar jika selesai
         if(jumlah === totalSoal){
              progressBar.style.background = "#2ecc71"; 
         } else {
