@@ -108,6 +108,16 @@ switch ($page) {
         gradeEssay($koneksi);
         break;
 
+    case 'student_list':
+        require_once 'controllers/TeacherController.php';
+        daftarSiswaPerCourse($koneksi);
+        break;
+
+    case 'progress_siswa':
+        require_once 'controllers/TeacherController.php';
+        progressSiswa($koneksi);
+        break;
+
     // --- FITUR SISWA ---
     case 'catalog':
         require_once 'controllers/StudentController.php';

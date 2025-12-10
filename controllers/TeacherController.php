@@ -2,6 +2,8 @@
 // controllers/TeacherController.php
 require_once 'models/CourseModel.php';
 require_once 'models/QuizModel.php';
+require_once 'models/ActivityModel.php';
+require_once 'models/UserModel.php';
 
 // --- DASHBOARD GURU ---
 function dashboardTeacher($koneksi) {
@@ -174,3 +176,41 @@ function courseDetailTeacher($koneksi) {
     
     require 'views/teacher/course_manage.php';
 }
+
+function daftarSiswaPerCourse($koneksi) {
+    $course_id = intval($_GET['course_id']);
+    $teacher_id = $_SESSION['user_id'];
+
+    // Validasi kepemilikan course
+    $course = ambilCourseByIdUser($koneksi, $course_id, $teacher_id);
+    if (!$course) {
+        die("Akses ditolak.");
+    }
+
+    $siswa_list = ambilSiswaByCourse($koneksi, $course_id);
+    require 'views/teacher/student_list.php';
+}
+
+function progressSiswa($koneksi) {
+    $course_id = intval($_GET['course_id']);
+    $student_id = intval($_GET['student_id']);
+    $teacher_id = $_SESSION['user_id'];
+
+    // Validasi kepemilikan course
+    $course = ambilCourseByIdUser($koneksi, $course_id, $teacher_id);
+    if (!$course) die("Akses ditolak.");
+
+    // Ambil data siswa
+    $student = ambilUserById($koneksi, $student_id);
+
+    // Ambil struktur course lengkap
+    $chapters = ambilFullCourseStructure($koneksi, $course_id);
+
+    // Ambil nilai kuis siswa
+    $nilai_list = ambilRekapNilaiSiswa($koneksi, $student_id, $course_id);
+
+    // Kirim ke view
+    require 'views/teacher/student_progress.php';
+}
+
+?>

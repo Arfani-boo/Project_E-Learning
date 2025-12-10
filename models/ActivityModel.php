@@ -116,4 +116,28 @@ function hapusTandaSelesai($koneksi, $user_id, $material_id) {
     return mysqli_query($koneksi, $query);
 }
 
+function ambilSiswaByCourse($koneksi, $course_id) {
+    $query = "SELECT u.id, u.full_name, u.email, e.enrolled_at
+              FROM enrollments e
+              JOIN users u ON e.user_id = u.id
+              WHERE e.course_id = $course_id
+              ORDER BY u.full_name ASC";
+    return mysqli_query($koneksi, $query);
+}
+
+function hitungProgressSiswa($koneksi, $student_id, $course_id) {
+    $total_materi = mysqli_fetch_assoc(mysqli_query($koneksi,
+        "SELECT COUNT(*) as total FROM materials m
+         JOIN chapters c ON m.chapter_id = c.id
+         WHERE c.course_id = $course_id"))['total'];
+
+    $selesai = mysqli_fetch_assoc(mysqli_query($koneksi,
+        "SELECT COUNT(*) as selesai FROM material_completions mc
+         JOIN materials m ON mc.material_id = m.id
+         JOIN chapters c ON m.chapter_id = c.id
+         WHERE c.course_id = $course_id AND mc.user_id = $student_id"))['selesai'];
+
+    return $total_materi ? round($selesai / $total_materi * 100) : 0;
+}
+
 ?>
