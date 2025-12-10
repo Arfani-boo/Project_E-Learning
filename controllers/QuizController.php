@@ -59,14 +59,12 @@ function saveQuestion($koneksi) {
             exit; // Stop script agar tidak lanjut menyimpan
         }
 
-        // --- LOGIC UPLOAD MEDIA ---
+        // --- LOGIC SIMPAN LINK/NAMA MEDIA ---
         $media_filename = null;
-        if (isset($_FILES['media_file']) && $_FILES['media_file']['error'] == 0) {
-            if (!is_dir('uploads')) mkdir('uploads');
-            $ext = pathinfo($_FILES['media_file']['name'], PATHINFO_EXTENSION);
-            $new_name = "quiz_" . $quiz_id . "_" . time() . "." . $ext;
-            move_uploaded_file($_FILES['media_file']['tmp_name'], "uploads/" . $new_name);
-            $media_filename = $new_name;
+        // Ambil data dari $_POST karena formnya sekarang Text Input
+        if (!empty($_POST['media_file'])) {
+            // Trim untuk menghapus spasi tidak sengaja di awal/akhir
+            $media_filename = trim($_POST['media_file']);
         }
 
         // --- SIMPAN DATA ---
@@ -97,13 +95,20 @@ function deleteQuestion($koneksi) {
     $query_options = "DELETE FROM options WHERE question_id = $question_id";
     mysqli_query($koneksi, $query_options);
 
-    // TAHAP 3: Hapus File Media (Gambar/Audio) jika ada
+    // TAHAP 3: Hapus File Media (Hanya jika itu file LOKAL, bukan Link YouTube)
     $q_cek = mysqli_query($koneksi, "SELECT media_file FROM questions WHERE id = $question_id");
     $data = mysqli_fetch_assoc($q_cek);
+
     if (!empty($data['media_file'])) {
-        $file_path = "uploads/" . $data['media_file'];
-        if (file_exists($file_path)) {
-            unlink($file_path); // Hapus file dari folder
+        $media = $data['media_file'];
+        
+        // Cek: Jangan hapus jika itu Link URL (http/https)
+        if (strpos($media, 'http') === false) {
+            $file_path = "uploads/" . $media;
+            // Hapus file fisik hanya jika file tersebut ada di folder uploads
+            if (file_exists($file_path)) {
+                unlink($file_path); 
+            }
         }
     }
 

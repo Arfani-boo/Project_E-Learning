@@ -54,18 +54,41 @@
                     </p>
 
                     <?php if(!empty($q['media_file'])): ?>
-                        <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <div style="margin-bottom: 15px; padding: 10px; background: #f8f9fa; border-radius: 5px; text-align: center;">
                             <?php 
-                                $ext = strtolower(pathinfo($q['media_file'], PATHINFO_EXTENSION));
-                                if(in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])): 
+                                $media = $q['media_file'];
+                                
+                                // 1. Cek apakah ini Link YouTube
+                                if (strpos($media, 'youtube.com') !== false || strpos($media, 'youtu.be') !== false):
+                                    // Ambil ID Video
+                                    $video_id = "";
+                                    if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $media, $match)) {
+                                        $video_id = $match[1];
+                                    }
                             ?>
-                                <img src="uploads/<?= $q['media_file'] ?>" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
-                            <?php elseif(in_array($ext, ['mp3', 'wav', 'ogg'])): ?>
-                                🔊 <b>Audio Listening:</b><br>
-                                <audio controls style="width: 100%; margin-top: 5px;">
-                                    <source src="uploads/<?= $q['media_file'] ?>" type="audio/<?= $ext ?>">
-                                    Browser Anda tidak mendukung audio player.
+                                <div style="max-width: 100%; overflow: hidden;">
+                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/<?= $video_id ?>" frameborder="0" allowfullscreen></iframe>
+                                </div>
+
+                            <?php 
+                                // 2. Jika bukan YouTube, Cek apakah Gambar (berakhiran jpg/png/dll)
+                                elseif (preg_match('/\.(jpg|jpeg|png|gif)$/i', $media)): 
+                                    // Cek apakah link luar (http) atau file lokal
+                                    $img_src = (strpos($media, 'http') === 0) ? $media : "uploads/" . $media;
+                            ?>
+                                <img src="<?= $img_src ?>" style="max-width: 100%; max-height: 250px; border-radius: 5px;">
+
+                            <?php 
+                                // 3. Jika Audio File (MP3)
+                                elseif (preg_match('/\.(mp3|wav|ogg)$/i', $media)): 
+                                    $audio_src = (strpos($media, 'http') === 0) ? $media : "uploads/" . $media;
+                            ?>
+                                <audio controls style="width: 100%;">
+                                    <source src="<?= $audio_src ?>">
                                 </audio>
+
+                            <?php else: ?>
+                                <a href="<?= $media ?>" target="_blank">📄 Buka Media (Link)</a>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
@@ -113,9 +136,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Upload Media (Opsional)</label>
-                        <input type="file" name="media_file" class="form-control" accept="audio/*,image/*">
-                        <small style="color: gray; font-size: 0.8rem;">Upload <b>MP3</b> untuk Listening atau <b>Gambar</b> untuk Reading.</small>
+                        <label>Link Media (YouTube / Gambar)</label>
+                        <input type="text" name="media_file" class="form-control" placeholder="Tempel Link YouTube atau URL Gambar di sini...">
+                        <small style="color: gray; font-size: 0.8rem;">Masukkan link <b>YouTube</b> untuk soal Listening atau <b>Link Gambar</b> untuk Reading.</small>
                     </div>
 
                     <div class="form-group">
