@@ -66,9 +66,9 @@ function updateCourse($koneksi, $id, $title, $desc, $level) {
 }
 
 function hapusCourse($koneksi, $id) {
-    // Karena di database sudah ON DELETE CASCADE, 
-    // menghapus course otomatis menghapus chapters, materials, dan quiz di dalamnya.
-    $query = "DELETE FROM courses WHERE id=$id";
+    // Karena database sudah ON DELETE CASCADE, 
+    // cukup hapus row di tabel courses saja.
+    $query = "DELETE FROM courses WHERE id = $id";
     return mysqli_query($koneksi, $query);
 }
 
