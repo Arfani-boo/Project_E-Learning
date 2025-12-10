@@ -1,8 +1,10 @@
 <?php include 'views/layouts/header.php'; ?>
 
 <div class="container">
-    <h2>👥 Daftar Siswa - <?= htmlspecialchars($course['title']) ?></h2>
-    <a href="index.php?page=course_detail&id=<?= $course['id'] ?>" class="btn">⬅ Kembali</a>
+    <h2>👥 Daftar Siswa - <?= htmlspecialchars($course['title']) ?></h2><br>
+    <a href="index.php?page=course_detail&id=<?= $course['id'] ?>" class="btn" style="background-color: #6c757d; color: white; text-decoration: none; padding: 10px 18px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500;">⬅ Kembali
+        </a>
+    <br><br>
     <hr>
 
     <table class="table">

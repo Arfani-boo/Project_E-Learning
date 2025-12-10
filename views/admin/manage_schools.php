@@ -7,8 +7,7 @@
             <p style="margin: 5px 0 0 0; color: gray;">Tambah data sekolah agar siswa bisa memilihnya saat mendaftar.</p>
         </div>
         <a href="index.php?page=dashboard" class="btn" 
-           style="background-color: #6c757d; color: white; text-decoration: none; padding: 10px 18px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500;">
-            ⬅️ Back To Dashboard
+           style="background-color: #6c757d; color: white; text-decoration: none; padding: 10px 18px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 500;">⬅ Back To Dashboard
         </a>
     </div>
     <br>

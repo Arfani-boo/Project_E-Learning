@@ -7,8 +7,7 @@
             <p style="color: gray; margin: 0;">Daftarkan akun Admin di sini.</p>
         </div>
         <a href="index.php?page=dashboard" class="btn" 
-        style="background-color: #6c757d; color: white; text-decoration: none; padding: 12px 15px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center;">
-            ⬅️ Back To Dashboard
+        style="background-color: #6c757d; color: white; text-decoration: none; padding: 12px 15px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center;">⬅ Back To Dashboard
         </a>
     </div>
     <br>

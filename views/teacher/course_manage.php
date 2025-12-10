@@ -114,7 +114,8 @@
                     <button type="submit" class="btn btn-primary btn-block">Simpan Bab</button>
                 </form>
             </div>
-            <a href="index.php?page=student_list&course_id=<?= $course['id'] ?>" class="btn btn-info btn-sm">👥 Lihat Siswa</a>
+            <a href="index.php?page=student_list&course_id=<?= $course['id'] ?>" class="btn" style="background-color: #3498db; color: white; text-decoration: none; padding: 12px; border-radius: 5px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; width: 100%; font-weight: bold;"> 👥 Lihat Siswa 
+            </a>
         </div>
 
     </div>
