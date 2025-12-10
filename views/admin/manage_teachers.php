@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div style="flex: 2; min-width: 400px;">
+        <div style="flex: 2; min-width: 900px;">
             <div class="card">
                 <h3>📋 Daftar Guru Terdaftar</h3>
                 
