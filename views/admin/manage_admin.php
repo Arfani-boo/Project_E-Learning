@@ -1,8 +1,16 @@
 <?php include 'views/layouts/header.php'; ?>
 
 <div class="container">
-    <h2>👨‍💻 Manajemen Admin</h2>
-    <p style="color: gray;">Daftarkan akun Admin di sini.</p>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div>
+            <h2>👨‍💻 Manajemen Admin</h2>
+            <p style="color: gray; margin: 0;">Daftarkan akun Admin di sini.</p>
+        </div>
+        <a href="index.php?page=dashboard" class="btn" 
+        style="background-color: #6c757d; color: white; text-decoration: none; padding: 12px 15px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center;">
+            ⬅️ Back To Dashboard
+        </a>
+    </div>
     <br>
 
     <div style="display: flex; gap: 30px; flex-wrap: wrap;">
@@ -70,6 +78,7 @@
                                 <td><?= $row['email'] ?></td>
                                 <td>
                                     <a href="index.php?page=manage_admin&hapus_id=<?= $row['id'] ?>" onclick="return confirm('Yakin?')" class="btn btn-delete">🗑️ Hapus</a>
+                                </td>
                             </tr>
                             <?php endwhile; ?>
                         </tbody>
