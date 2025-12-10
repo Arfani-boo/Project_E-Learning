@@ -25,16 +25,15 @@ $nilai_list = $nilai_list ?? [];
     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
         <div style="flex: 2; min-width: 400px;">
             <div class="card">
-                <h3>📚 Progress Materi per Bab</h3>
+                <h3>📚 Progress Materi per Bab</h3><br>
                 <hr>
-
+                <br>
                 <?php if (empty($chapters)): ?>
                     <p style="color: gray;">Belum ada bab atau materi.</p>
                 <?php else: ?>
                     <?php foreach ($chapters as $bab): ?>
                         <div style="margin-bottom: 20px;">
-                            <h4>📂 <?= htmlspecialchars($bab['title']) ?></h4>
-
+                            <h4>📂 <?= htmlspecialchars($bab['title']) ?></h4><br>
                             <?php if (empty($bab['materials'])): ?>
                                 <p style="color: gray; font-size: 0.9rem;">Tidak ada materi.</p>
                             <?php else: ?>
@@ -60,10 +59,10 @@ $nilai_list = $nilai_list ?? [];
 
         <div style="flex: 1; min-width: 300px;">
             <div class="card">
-                <h3>📝 Nilai Kuis per Bab</h3>
+                <h3>📝 Nilai Kuis per Bab</h3><br>
                 <hr>
 
-                <?php if (count($nilai_list) == 0): ?>
+                <?php if (mysqli_num_rows($nilai_list) == 0): ?>
                     <p style="color: gray;">Belum ada kuis yang dikerjakan.</p>
                 <?php else: ?>
                     <table class="table" style="font-size: 0.9rem;">
@@ -75,7 +74,7 @@ $nilai_list = $nilai_list ?? [];
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($nilai_list as $n): ?>
+                            <?php while ($n = mysqli_fetch_assoc($nilai_list)): ?>
                                 <?php
                                 $status_koreksi = 'SELESAI';
                                 $ada_essay = cekAdaSoalEssay($koneksi, $n['quiz_id']);
@@ -94,18 +93,17 @@ $nilai_list = $nilai_list ?? [];
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <span class="badge" style="background: <?= $warna ?>; color: white;">
+                                        <span class="badge" style="background: <?= $warna ?>; color: white; padding: 4px 8px; border-radius: 4px;">
                                             <?= $status_koreksi === 'PENDING' ? '⏳' : ($n['score'] >= 70 ? '✅ Lulus' : '❌ Remidi') ?>
                                         </span>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
                 <?php endif; ?>
             </div>
         </div>
-
     </div>
 </div>
 
