@@ -48,15 +48,26 @@ include "views/layouts/header.php";
                 </div>
 
             <?php elseif ($materi["type"] == "audio"): ?>
-                <div style="text-align: center; padding: 40px;">
-                    <span style="font-size: 4rem;">🎧</span>
-                    <h3 style="margin-top: 1rem;">Listening Section</h3>
-                    <audio controls style="width: 100%; margin-top: 1rem;">
-                        <source src="<?= $materi[
-                            "content_url"
-                        ] ?>" type="audio/mpeg">
-                        Browser does not support audio element.
-                    </audio>
+                <div style="text-align: center; padding: 40px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+                    <span style="font-size: 3rem;">🎧</span>
+                    <h3 style="margin: 10px 0;">Listening Section</h3>
+                    <p style="color: #6b7280; font-size: 0.9rem;">Klik tombol di bawah untuk mendengarkan audio.</p>
+
+                    <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                        <button id="playBtn" class="btn" style="background: #10b981; color: white; padding: 10px 25px;">▶ Play</button>
+                        <button id="pauseBtn" class="btn" style="background: #f59e0b; color: white; padding: 10px 25px;">⏸ Pause</button>
+                        <button id="stopBtn" class="btn" style="background: #ef4444; color: white; padding: 10px 25px;">⏹ Stop</button>
+                    </div>
+
+                    <div style="position: absolute; left: -9999px; top: -9999px;">
+                        <?php 
+                            $video_id = "";
+                            if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $materi["content_url"], $match)) {
+                                $video_id = $match[1];
+                            }
+                        ?>
+                        <div id="youtube-player"></div>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>
@@ -84,4 +95,34 @@ include "views/layouts/header.php";
     </div>
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: '<?= $video_id ?>',
+            playerVars: {
+                'playsinline': 1
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        playBtn.addEventListener('click', () => player.playVideo());
+        pauseBtn.addEventListener('click', () => player.pauseVideo());
+        stopBtn.addEventListener('click', () => {
+            player.stopVideo();
+            player.seekTo(0);
+        });
+    }
+</script>
 <?php include "views/layouts/footer.php"; ?>
