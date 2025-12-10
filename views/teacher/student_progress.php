@@ -63,7 +63,7 @@ $nilai_list = $nilai_list ?? [];
                 <h3>📝 Nilai Kuis per Bab</h3>
                 <hr>
 
-                <?php if (mysqli_num_rows($nilai_list) == 0): ?>
+                <?php if (count($nilai_list) == 0): ?>
                     <p style="color: gray;">Belum ada kuis yang dikerjakan.</p>
                 <?php else: ?>
                     <table class="table" style="font-size: 0.9rem;">
@@ -75,7 +75,7 @@ $nilai_list = $nilai_list ?? [];
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($n = mysqli_fetch_assoc($nilai_list)): ?>
+                            <?php foreach ($nilai_list as $n): ?>
                                 <?php
                                 $status_koreksi = 'SELESAI';
                                 $ada_essay = cekAdaSoalEssay($koneksi, $n['quiz_id']);
@@ -99,7 +99,7 @@ $nilai_list = $nilai_list ?? [];
                                         </span>
                                     </td>
                                 </tr>
-                            <?php endwhile; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 <?php endif; ?>
