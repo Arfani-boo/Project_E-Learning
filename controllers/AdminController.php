@@ -53,7 +53,7 @@ function manageTeachers($koneksi) {
         $telp  = $_POST['telp'];
         $alamat= $_POST['alamat'];
 
-        $err = updateTeacherManual($koneksi, $id, $nama, $email, $telp, $alamat);
+        $err = updateGuruManual($koneksi, $id, $nama, $email, $telp, $alamat);
         if ($err !== true) {
             $_SESSION['error'] = $err;
             header("Location: index.php?page=manage_teachers&edit_id=$id");
